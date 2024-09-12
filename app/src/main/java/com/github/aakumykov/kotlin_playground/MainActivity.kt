@@ -7,6 +7,8 @@ import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.extensions.showAppProperties
 import com.github.aakumykov.kotlin_playground.extensions.showToast
 import com.github.aakumykov.kotlin_playground.shortcuts_parser.ShortcutsHandler
+import com.github.aakumykov.kotlin_playground.shortcuts_parser.model.RawShortcutResolver
+import com.github.aakumykov.kotlin_playground.shortcuts_parser.model.ResourceResolver
 import java.io.InputStream
 import javax.xml.parsers.SAXParserFactory
 
@@ -49,8 +51,13 @@ class MainActivity : AppCompatActivity() {
         val shortcutsHandler = ShortcutsHandler()
         saxParser.parse(resources.openRawResource(R.raw.shortcuts), shortcutsHandler)
 
-        val shortcuts = shortcutsHandler.getShortcuts()
-        Log.d(TAG, shortcuts.toString())
+        val rawShortcuts = shortcutsHandler.getShortcuts()
+
+        val resourceResolver = ResourceResolver(packageName, resources)
+        val rawShortcutResolver = RawShortcutResolver(resourceResolver)
+        val shortcuts = rawShortcuts.map { rawShortcutResolver.resolveRawShortcut(this@MainActivity, it) }
+
+        Log.d(TAG, rawShortcuts.toString() + shortcuts.toString())
     }
 
     private fun action3() {
