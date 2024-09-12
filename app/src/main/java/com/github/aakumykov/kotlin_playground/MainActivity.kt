@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.extensions.showAppProperties
 import com.github.aakumykov.kotlin_playground.extensions.showToast
+import java.io.InputStream
+import javax.xml.parsers.SAXParserFactory
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,7 +31,14 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun action1() {
-        showToast("Привет :-)")
+        val factory = SAXParserFactory.newInstance()
+        val saxParser = factory.newSAXParser()
+        val baeldungHandler = BaeldungHandler()
+
+        val xmlFileInputStream: InputStream = resources.openRawResource(R.raw.baeldung)
+        saxParser.parse(xmlFileInputStream, baeldungHandler)
+
+        val website = baeldungHandler.website
     }
 
     private fun action2() {
