@@ -13,6 +13,8 @@ public class BaeldungHandler extends DefaultHandler {
     private static final String TITLE = "title";
     private static final String CONTENT = "content";
 
+    private static final String ATTR_WRITTEN = "written";
+
     private Baeldung website;
     private StringBuilder elementValue;
 
@@ -31,13 +33,14 @@ public class BaeldungHandler extends DefaultHandler {
     }
 
     @Override
-    public void startElement(String uri, String lName, String qName, Attributes attr) throws SAXException {
+    public void startElement(String uri, String lName, String qName, Attributes attributes) throws SAXException {
         switch (qName) {
             case ARTICLES:
                 website.articleList = new ArrayList<>();
                 break;
             case ARTICLE:
                 website.articleList.add(new BaeldungArticle());
+                latestArticle().setWritten(attributes.getValue(ATTR_WRITTEN));
                 break;
             case TITLE:
                 elementValue = new StringBuilder();

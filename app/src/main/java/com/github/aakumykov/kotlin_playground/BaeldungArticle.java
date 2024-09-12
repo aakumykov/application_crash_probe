@@ -4,6 +4,7 @@ public class BaeldungArticle {
 
     private String title;
     private String content;
+    private String written;
 
     public void setTitle(String string) {
         this.title = string;
@@ -12,6 +13,9 @@ public class BaeldungArticle {
     public void setContent(String string) {
         this.content = string;
     }
-    // usual getters and setters
+
+    public void setWritten(String string) {
+        this.written = string;
+    }
 }
 
