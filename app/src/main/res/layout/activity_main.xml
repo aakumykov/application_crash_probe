@@ -33,13 +33,14 @@
             android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Прочитать XML" />
+            android:text="Прочитать baeldung.xml" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Действие 2" />
+            android:text="Прочитать shortcuts.xml"
+            android:backgroundTint="#0097A7"/>
 
         <LinearLayout
             android:id="@+id/horizontalButtonsContainer1"

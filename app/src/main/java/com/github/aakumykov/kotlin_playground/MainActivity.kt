@@ -1,10 +1,12 @@
 package com.github.aakumykov.kotlin_playground
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.extensions.showAppProperties
 import com.github.aakumykov.kotlin_playground.extensions.showToast
+import com.github.aakumykov.kotlin_playground.shortcuts_parser.ShortcutsHandler
 import java.io.InputStream
 import javax.xml.parsers.SAXParserFactory
 
@@ -39,10 +41,16 @@ class MainActivity : AppCompatActivity() {
         saxParser.parse(xmlFileInputStream, baeldungHandler)
 
         val website = baeldungHandler.website
+        Log.d(TAG, website.toString())
     }
 
     private fun action2() {
-        showToast("Привет 2")
+        val saxParser = SAXParserFactory.newInstance().newSAXParser()
+        val shortcutsHandler = ShortcutsHandler()
+        saxParser.parse(resources.openRawResource(R.raw.shortcuts), shortcutsHandler)
+
+        val shortcuts = shortcutsHandler.getShortcuts()
+        Log.d(TAG, shortcuts.toString())
     }
 
     private fun action3() {
