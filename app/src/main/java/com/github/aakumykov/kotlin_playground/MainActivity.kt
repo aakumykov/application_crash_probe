@@ -1,7 +1,6 @@
 package com.github.aakumykov.kotlin_playground
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.dynamic_shortcut_manager.DynamicShortcutManager
@@ -13,13 +12,14 @@ import com.github.aakumykov.kotlin_playground.shortcuts_parser.model.Shortcut
 import com.github.aakumykov.kotlin_playground.shortcuts_parser.utils.ShortcutsXMLRawParser
 import com.github.aakumykov.kotlin_playground.shortcuts_parser.utils.RawShortcutResolver
 import com.github.aakumykov.kotlin_playground.shortcuts_parser.utils.ResourceResolver
-import java.io.InputStream
+import com.gitlab.aakumykov.exception_utils_module.ExceptionUtils
 import javax.xml.parsers.SAXParserFactory
+import kotlin.random.Random
 
 
 class MainActivity : AppCompatActivity() {
 
-    private var shortcuts: Result<List<Shortcut>>? = null
+    private var shortcuts: List<Shortcut>? = null
     private val dynamicShortcutManager by lazy { DynamicShortcutManager(this) }
 
     private lateinit var binding: ActivityMainBinding
@@ -35,65 +35,75 @@ class MainActivity : AppCompatActivity() {
         binding.clearLogButton.setOnClickListener { Logger.clear() }
 
         binding.button1.setOnClickListener { action1() }
-        binding.button2.setOnClickListener { action2() }
-        binding.button3.setOnClickListener { action3() }
-        binding.button4.setOnClickListener { action4() }
+        binding.button2.setOnClickListener { readShortcutsXML() }
+        binding.button3.setOnClickListener { createShortcuts() }
+        binding.button4.setOnClickListener { removeShortcuts() }
     }
 
 
     private fun action1() {
-        val factory = SAXParserFactory.newInstance()
-        val saxParser = factory.newSAXParser()
-        val baeldungHandler = BaeldungHandler()
+        val a: Int? = null
 
-        val xmlFileInputStream: InputStream = resources.openRawResource(R.raw.baeldung)
-        saxParser.parse(xmlFileInputStream, baeldungHandler)
+        // Так не работает
+        a ?: {
+            Logger.d(TAG, "a == null")
+            showToast("a == null")
+        }
 
-        val website = baeldungHandler.website
-        Log.d(TAG, website.toString())
+        // А так работает
+//        a ?: showToast("a == null")
+
+        // И так работает
+        a?.also {
+            showToast("a != null")
+        } ?: run {
+            showToast("a == null")
+        }
     }
 
-    private fun action2() {
-        val shortcutsParser = ShortcutsParser(
+    private fun readShortcutsXML() {
+
+        ShortcutsParser(
             ShortcutsXMLRawParser(SAXParserFactory.newInstance().newSAXParser(), ShortcutsSAXHandler()),
             RawShortcutResolver(ResourceResolver(packageName, resources))
         )
-
-        shortcuts = shortcutsParser.parse(this, R.raw.shortcuts)
-
-        shortcuts?.getOrNull()?.also { list ->
-            list.forEachIndexed { index, shortcut ->
-                Logger.d(TAG, "$index) ${shortcut.shortcutId}")
+            .parse(this, R.raw.shortcuts)
+            .onSuccess {  shortcutList ->
+                this@MainActivity.shortcuts = shortcutList
+                Logger.d(TAG,"XML ярлыков прочитан")
             }
-        } ?: {
-            showToast("Список ярлыков пуст")
-        }
-
-        shortcuts?.getOrNull()?.also {
-            dynamicShortcutManager.recreateShortcuts(it)
-        } ?: {
-            showToast("Нет ярлыков")
-        }
+            .onFailure {
+                ExceptionUtils.getErrorMessage(it).also { errorMsg ->
+                    showToast(errorMsg)
+                    Logger.d(TAG, errorMsg)
+                }
+            }
     }
 
-    private fun action3() {
-        shortcuts?.also {
-            it.getOrNull()?.also { list ->
-                dynamicShortcutManager.createShortcutsFromList(list)
-                showToast("Ярлыки обновлены (пересозданы?)")
-            } ?: {
-                showToast("Нет инфы о ярлыках")
+    private fun createShortcuts() {
+        shortcuts?.also { list ->
+            dynamicShortcutManager.removeDynamicShortcuts(list)
+
+            val listOf4: List<Shortcut> = list.toMutableList().apply {
+                removeAt(Random.nextInt(0, this.size))
             }
-        } ?: {
+
+            dynamicShortcutManager.createDynamicShortcuts(listOf4)
+                .onSuccess { showToast("Ярлыки обновлены (пересозданы?)") }
+                .onFailure {
+                    showToast("Ошибка")
+                    Logger.d(TAG, ExceptionUtils.getErrorMessage(it))
+                }
+        } ?: run {
             showToast("Прочитайте файл ярлыков")
         }
     }
 
-    private fun action4() {
-        shortcuts?.also {
-            dynamicShortcutManager.removeAllShortcuts()
+    private fun removeShortcuts() {
+        shortcuts?.also { list ->
+            dynamicShortcutManager.removeDynamicShortcuts(list)
             showToast("Ярлыки должны быть удалены")
-        } ?: {
+        } ?: run {
             showToast("Прочитайте файл ярлыков")
         }
     }

@@ -7,20 +7,28 @@ import com.github.aakumykov.kotlin_playground.shortcuts_parser.model.toShortcutI
 
 class DynamicShortcutManager(private val context: Context) {
 
-    fun recreateShortcuts(list: List<Shortcut>) {
-        removeAllShortcuts()
-        createShortcutsFromList(list)
-    }
-
-    fun createShortcutsFromList(list: List<Shortcut>) {
-        list.map {
-            it.toShortcutInfo(context)
-        }.also {
-            ShortcutManagerCompat.addDynamicShortcuts(context, it)
+    /**
+     * @param List of [Shortcut] objects. Must be <= 4.
+     * @return Number of created shortcuts.
+     */
+    fun createDynamicShortcuts(list: List<Shortcut>): Result<Int> {
+        return list.map { shortcutList ->
+            shortcutList.toShortcutInfo(context)
         }
+            .let { shortcutInfoList ->
+                try {
+                    ShortcutManagerCompat.addDynamicShortcuts(context, shortcutInfoList)
+                    Result.success(shortcutInfoList.size)
+                }
+                catch (e: Exception) {
+                    Result.failure(e)
+                }
+            }
     }
 
-    fun removeAllShortcuts() {
-        ShortcutManagerCompat.removeAllDynamicShortcuts(context)
+    fun removeDynamicShortcuts(list: List<Shortcut>) {
+        list.map { it.shortcutId }.also { idList ->
+            ShortcutManagerCompat.removeDynamicShortcuts(context, idList)
+        }
     }
 }

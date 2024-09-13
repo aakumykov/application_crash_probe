@@ -11,7 +11,9 @@ class ShortcutsParser(
     private val rawShortcutResolver: RawShortcutResolver,
 ) {
     fun parse(context: Context, @RawRes shortcutsXMLRawResource: Int): Result<List<Shortcut>> {
+
         val shortcutsXMLInputStream = context.resources.openRawResource(shortcutsXMLRawResource)
+
         return shortcutsXMLRawParser.parse(shortcutsXMLInputStream)
             .mapCatching { rawList ->
                 rawList.map {  rawShortcut ->
