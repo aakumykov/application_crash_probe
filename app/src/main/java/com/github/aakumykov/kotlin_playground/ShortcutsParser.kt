@@ -1,0 +1,22 @@
+package com.github.aakumykov.kotlin_playground
+
+import android.content.Context
+import androidx.annotation.RawRes
+import com.github.aakumykov.kotlin_playground.shortcuts_parser.model.RawShortcutResolver
+import com.github.aakumykov.kotlin_playground.shortcuts_parser.model.Shortcut
+import java.io.InputStream
+
+class ShortcutsParser(
+    private val shortcutsXMLRawParser: ShortcutsXMLRawParser,
+    private val rawShortcutResolver: RawShortcutResolver,
+) {
+    fun parse(context: Context, @RawRes shortcutsXMLRawResource: Int): Result<List<Shortcut>> {
+        val shortcutsXMLInputStream = context.resources.openRawResource(shortcutsXMLRawResource)
+        return shortcutsXMLRawParser.parse(shortcutsXMLInputStream)
+            .mapCatching { rawList ->
+                rawList.map {  rawShortcut ->
+                    rawShortcutResolver.resolveRawShortcut(context,rawShortcut)
+                }
+            }
+    }
+}

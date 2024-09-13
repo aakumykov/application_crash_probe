@@ -47,17 +47,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun action2() {
-        val saxParser = SAXParserFactory.newInstance().newSAXParser()
-        val shortcutsHandler = ShortcutsHandler()
-        saxParser.parse(resources.openRawResource(R.raw.shortcuts), shortcutsHandler)
+        val shortcutsParser = ShortcutsParser(
+            ShortcutsXMLRawParser(SAXParserFactory.newInstance().newSAXParser(), ShortcutsHandler()),
+            RawShortcutResolver(ResourceResolver(packageName, resources))
+        )
 
-        val rawShortcuts = shortcutsHandler.getShortcuts()
+        val shortcuts = shortcutsParser.parse(this, R.raw.shortcuts)
 
-        val resourceResolver = ResourceResolver(packageName, resources)
-        val rawShortcutResolver = RawShortcutResolver(resourceResolver)
-        val shortcuts = rawShortcuts.map { rawShortcutResolver.resolveRawShortcut(this@MainActivity, it) }
-
-        Log.d(TAG, rawShortcuts.toString() + shortcuts.toString())
+        shortcuts.getOrNull()?.also { list ->
+            list.forEachIndexed { index, shortcut ->
+                Logger.d(TAG, "$index) ${shortcut.shortcutId}")
+            }
+        } ?: {
+            showToast("Список ярлыков пуст")
+        }
     }
 
     private fun action3() {
