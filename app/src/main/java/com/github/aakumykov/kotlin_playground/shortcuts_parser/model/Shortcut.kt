@@ -23,7 +23,7 @@ data class Shortcut(
 fun Shortcut.toShortcutInfo(context: Context): ShortcutInfoCompat {
     return ShortcutInfoCompat.Builder(context, shortcutId)
         .apply {
-            setShortLabel("Website")
+            setShortLabel(context.getString(shortcutShortLabel))
             shortcutLongLabel?.also { setLongLabel(context.getString(it)) }
             setIcon(IconCompat.createWithResource(context, icon))
             intent?.also { setIntent(it) }
