@@ -47,7 +47,6 @@ dependencies {
 //    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     implementation 'com.github.aakumykov:exception_utils:0.4'
-    implementation project(':lib')
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.12'
 
@@ -57,4 +56,6 @@ dependencies {
 
 //    implementation "androidx.fragment:fragment-ktx:1.6.2"
 //    implementation "androidx.activity:activity-ktx:1.8.2"
+
+    implementation 'com.github.aakumykov:android_dynamic_shortcuts_manager:0.0.1-alpha'
 }
