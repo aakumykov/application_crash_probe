@@ -53,14 +53,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Действие 3" />
+                android:text="Обновить ярлыки"
+                android:backgroundTint="#29B6F6"/>
 
             <Button
                 android:id="@+id/button4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Действие 4" />
+                android:text="Удалить ярлыки"
+                android:backgroundTint="#D32F2F"/>
 
         </LinearLayout>
 

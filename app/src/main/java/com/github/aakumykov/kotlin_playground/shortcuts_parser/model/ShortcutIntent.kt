@@ -16,9 +16,9 @@ data class ShortcutIntent(
     }
 }
 
-fun ShortcutIntent.toIntent(context: Context): Intent {
+fun ShortcutIntent.toIntent(): Intent {
     return Intent().apply {
-        this.action = action
-        this.component = ComponentName(targetPackage, targetClass)
+        this@apply.action = this@toIntent.action
+        this@apply.component = ComponentName(this@toIntent.targetPackage, this@toIntent.targetClass)
     }
 }

@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
+import com.github.aakumykov.kotlin_playground.dynamic_shortcut_manager.DynamicShortcutManager
 import com.github.aakumykov.kotlin_playground.extensions.showAppProperties
 import com.github.aakumykov.kotlin_playground.extensions.showToast
 import com.github.aakumykov.kotlin_playground.shortcuts_parser.utils.ShortcutsSAXHandler
 import com.github.aakumykov.kotlin_playground.shortcuts_parser.ShortcutsParser
+import com.github.aakumykov.kotlin_playground.shortcuts_parser.model.Shortcut
 import com.github.aakumykov.kotlin_playground.shortcuts_parser.utils.ShortcutsXMLRawParser
 import com.github.aakumykov.kotlin_playground.shortcuts_parser.utils.RawShortcutResolver
 import com.github.aakumykov.kotlin_playground.shortcuts_parser.utils.ResourceResolver
@@ -16,6 +18,9 @@ import javax.xml.parsers.SAXParserFactory
 
 
 class MainActivity : AppCompatActivity() {
+
+    private var shortcuts: Result<List<Shortcut>>? = null
+    private val dynamicShortcutManager by lazy { DynamicShortcutManager(this) }
 
     private lateinit var binding: ActivityMainBinding
 
@@ -54,23 +59,43 @@ class MainActivity : AppCompatActivity() {
             RawShortcutResolver(ResourceResolver(packageName, resources))
         )
 
-        val shortcuts = shortcutsParser.parse(this, R.raw.shortcuts)
+        shortcuts = shortcutsParser.parse(this, R.raw.shortcuts)
 
-        shortcuts.getOrNull()?.also { list ->
+        shortcuts?.getOrNull()?.also { list ->
             list.forEachIndexed { index, shortcut ->
                 Logger.d(TAG, "$index) ${shortcut.shortcutId}")
             }
         } ?: {
             showToast("Список ярлыков пуст")
         }
+
+        shortcuts?.getOrNull()?.also {
+            dynamicShortcutManager.recreateShortcuts(it)
+        } ?: {
+            showToast("Нет ярлыков")
+        }
     }
 
     private fun action3() {
-        showToast("Привет 3")
+        shortcuts?.also {
+            it.getOrNull()?.also { list ->
+                dynamicShortcutManager.createShortcuts(list)
+                showToast("Ярлыки обновлены (пересозданы?)")
+            } ?: {
+                showToast("Нет инфы о ярлыках")
+            }
+        } ?: {
+            showToast("Прочитайте файл ярлыков")
+        }
     }
 
     private fun action4() {
-        showToast("Привет 4")
+        shortcuts?.also {
+            dynamicShortcutManager.removeAllShortcuts()
+            showToast("Ярлыки должны быть удалены")
+        } ?: {
+            showToast("Прочитайте файл ярлыков")
+        }
     }
 
 

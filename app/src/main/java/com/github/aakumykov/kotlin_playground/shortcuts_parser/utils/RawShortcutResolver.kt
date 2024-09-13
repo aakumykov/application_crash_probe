@@ -16,7 +16,7 @@ class RawShortcutResolver(private val resourceResolver: ResourceResolver) {
             enabled = rawShortcut.enabled,
             icon = resourceResolver.getDrawableResourceByName(rawShortcut.icon),
             shortcutShortLabel = resourceResolver.getStringResourceByName(rawShortcut.shortcutShortLabel),
-            intent = rawShortcut.shortcutIntent?.toIntent(context)
+            intent = rawShortcut.shortcutIntent?.toIntent()
         )
     }
 }
