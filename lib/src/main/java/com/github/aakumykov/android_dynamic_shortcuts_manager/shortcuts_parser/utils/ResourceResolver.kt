@@ -1,4 +1,4 @@
-package com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.utils
+package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils
 
 import android.content.res.Resources
 import android.content.res.Resources.NotFoundException

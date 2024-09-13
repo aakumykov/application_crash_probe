@@ -1,9 +1,9 @@
-package com.github.aakumykov.dynamic_shortcuts_manager.dynamic_shortcut_manager
+package com.github.aakumykov.android_dynamic_shortcuts_manager.dynamic_shortcut_manager
 
 import android.content.Context
 import androidx.core.content.pm.ShortcutManagerCompat
-import com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut
-import com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.model.toShortcutInfo
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.toShortcutInfo
 
 class DynamicShortcutManager(private val context: Context) {
 

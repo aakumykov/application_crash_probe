@@ -1,14 +1,14 @@
-package com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.utils
+package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils
 
-import com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut
-import com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut.Companion.ATTR_ENABLED
-import com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut.Companion.ATTR_ICON
-import com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut.Companion.ATTR_SHORTCUT_ID
-import com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut.Companion.ATTR_SHORTCUT_SHORT_LABEL
-import com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntent
-import com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntent.Companion.ATTR_ACTION
-import com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntent.Companion.ATTR_TARGET_CLASS
-import com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntent.Companion.ATTR_TARGET_PACKAGE
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut.Companion.ATTR_ENABLED
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut.Companion.ATTR_ICON
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut.Companion.ATTR_SHORTCUT_ID
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut.Companion.ATTR_SHORTCUT_SHORT_LABEL
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntent
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntent.Companion.ATTR_ACTION
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntent.Companion.ATTR_TARGET_CLASS
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntent.Companion.ATTR_TARGET_PACKAGE
 import org.xml.sax.Attributes
 import org.xml.sax.SAXException
 import org.xml.sax.helpers.DefaultHandler

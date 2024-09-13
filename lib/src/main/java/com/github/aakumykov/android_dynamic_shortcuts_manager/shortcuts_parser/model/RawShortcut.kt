@@ -1,4 +1,4 @@
-package com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.model
+package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model
 
 data class RawShortcut(
     var shortcutId: String,

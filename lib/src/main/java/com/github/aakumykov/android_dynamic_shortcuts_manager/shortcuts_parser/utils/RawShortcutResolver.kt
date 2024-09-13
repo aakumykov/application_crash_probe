@@ -1,9 +1,9 @@
-package com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.utils
+package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils
 
 import android.content.Context
-import com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut
-import com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut
-import com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.model.toIntent
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.toIntent
 
 class RawShortcutResolver(private val resourceResolver: ResourceResolver) {
 

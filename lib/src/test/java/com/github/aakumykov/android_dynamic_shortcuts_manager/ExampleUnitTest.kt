@@ -1,4 +1,4 @@
-package com.github.aakumykov.dynamic_shortcuts_manager
+package com.github.aakumykov.android_dynamic_shortcuts_manager
 
 import org.junit.Test
 
