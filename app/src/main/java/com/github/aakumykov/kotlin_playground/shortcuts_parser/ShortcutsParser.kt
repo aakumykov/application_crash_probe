@@ -1,10 +1,10 @@
-package com.github.aakumykov.kotlin_playground
+package com.github.aakumykov.kotlin_playground.shortcuts_parser
 
 import android.content.Context
 import androidx.annotation.RawRes
-import com.github.aakumykov.kotlin_playground.shortcuts_parser.model.RawShortcutResolver
+import com.github.aakumykov.kotlin_playground.shortcuts_parser.utils.RawShortcutResolver
 import com.github.aakumykov.kotlin_playground.shortcuts_parser.model.Shortcut
-import java.io.InputStream
+import com.github.aakumykov.kotlin_playground.shortcuts_parser.utils.ShortcutsXMLRawParser
 
 class ShortcutsParser(
     private val shortcutsXMLRawParser: ShortcutsXMLRawParser,

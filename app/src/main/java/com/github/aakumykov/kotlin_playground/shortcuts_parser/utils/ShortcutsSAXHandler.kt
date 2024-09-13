@@ -1,4 +1,4 @@
-package com.github.aakumykov.kotlin_playground.shortcuts_parser
+package com.github.aakumykov.kotlin_playground.shortcuts_parser.utils
 
 import com.github.aakumykov.kotlin_playground.shortcuts_parser.model.RawShortcut
 import com.github.aakumykov.kotlin_playground.shortcuts_parser.model.RawShortcut.Companion.ATTR_ENABLED
@@ -13,7 +13,7 @@ import org.xml.sax.Attributes
 import org.xml.sax.SAXException
 import org.xml.sax.helpers.DefaultHandler
 
-class ShortcutsHandler : DefaultHandler() {
+class ShortcutsSAXHandler : DefaultHandler() {
 
     private lateinit var rawShortcuts: MutableList<RawShortcut>
     private val elementValue: StringBuilder = StringBuilder()
@@ -32,12 +32,14 @@ class ShortcutsHandler : DefaultHandler() {
     override fun startElement(uri: String, lName: String, qName: String, attributes: Attributes) {
         when (qName) {
             SHORTCUT -> {
-                rawShortcuts.add(RawShortcut(
+                rawShortcuts.add(
+                    RawShortcut(
                     shortcutId = attributes.getValue(ATTR_SHORTCUT_ID),
                     icon = attributes.getValue(ATTR_ICON),
                     enabled = attributes.getValue(ATTR_ENABLED).toBoolean(),
                     shortcutShortLabel = attributes.getValue(ATTR_SHORTCUT_SHORT_LABEL)
-                ))
+                )
+                )
             }
             INTENT -> {
                 rawShortcuts.last().shortcutIntent = ShortcutIntent(

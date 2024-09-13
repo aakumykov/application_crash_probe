@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.extensions.showAppProperties
 import com.github.aakumykov.kotlin_playground.extensions.showToast
-import com.github.aakumykov.kotlin_playground.shortcuts_parser.ShortcutsHandler
-import com.github.aakumykov.kotlin_playground.shortcuts_parser.model.RawShortcutResolver
-import com.github.aakumykov.kotlin_playground.shortcuts_parser.model.ResourceResolver
+import com.github.aakumykov.kotlin_playground.shortcuts_parser.utils.ShortcutsSAXHandler
+import com.github.aakumykov.kotlin_playground.shortcuts_parser.ShortcutsParser
+import com.github.aakumykov.kotlin_playground.shortcuts_parser.utils.ShortcutsXMLRawParser
+import com.github.aakumykov.kotlin_playground.shortcuts_parser.utils.RawShortcutResolver
+import com.github.aakumykov.kotlin_playground.shortcuts_parser.utils.ResourceResolver
 import java.io.InputStream
 import javax.xml.parsers.SAXParserFactory
 
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun action2() {
         val shortcutsParser = ShortcutsParser(
-            ShortcutsXMLRawParser(SAXParserFactory.newInstance().newSAXParser(), ShortcutsHandler()),
+            ShortcutsXMLRawParser(SAXParserFactory.newInstance().newSAXParser(), ShortcutsSAXHandler()),
             RawShortcutResolver(ResourceResolver(packageName, resources))
         )
 

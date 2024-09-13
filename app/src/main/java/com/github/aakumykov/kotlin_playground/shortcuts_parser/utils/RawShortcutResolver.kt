@@ -1,9 +1,12 @@
-package com.github.aakumykov.kotlin_playground.shortcuts_parser.model
+package com.github.aakumykov.kotlin_playground.shortcuts_parser.utils
 
 import android.content.Context
 import android.content.res.Resources
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import com.github.aakumykov.kotlin_playground.shortcuts_parser.model.RawShortcut
+import com.github.aakumykov.kotlin_playground.shortcuts_parser.model.Shortcut
+import com.github.aakumykov.kotlin_playground.shortcuts_parser.model.toIntent
 
 class RawShortcutResolver(private val resourceResolver: ResourceResolver) {
 
