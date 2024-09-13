@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
     private fun action3() {
         shortcuts?.also {
             it.getOrNull()?.also { list ->
-                dynamicShortcutManager.createShortcuts(list)
+                dynamicShortcutManager.createShortcutsFromList(list)
                 showToast("Ярлыки обновлены (пересозданы?)")
             } ?: {
                 showToast("Нет инфы о ярлыках")

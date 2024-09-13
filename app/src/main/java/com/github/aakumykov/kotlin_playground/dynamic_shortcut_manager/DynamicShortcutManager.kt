@@ -9,11 +9,11 @@ class DynamicShortcutManager(private val context: Context) {
 
     fun recreateShortcuts(list: List<Shortcut>) {
         removeAllShortcuts()
-        createShortcuts(list)
+        createShortcutsFromList(list)
     }
 
-    fun createShortcuts(shortcutList: List<Shortcut>) {
-        shortcutList.map {
+    fun createShortcutsFromList(list: List<Shortcut>) {
+        list.map {
             it.toShortcutInfo(context)
         }.also {
             ShortcutManagerCompat.addDynamicShortcuts(context, it)
