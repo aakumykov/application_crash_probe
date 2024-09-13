@@ -1,14 +1,11 @@
-package com.github.aakumykov.kotlin_playground.shortcuts_parser.model
+package com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.model
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.pm.ShortcutInfoCompat
-import androidx.core.graphics.alpha
 import androidx.core.graphics.drawable.IconCompat
-import com.github.aakumykov.kotlin_playground.R
 
 data class Shortcut(
     val shortcutId: String,

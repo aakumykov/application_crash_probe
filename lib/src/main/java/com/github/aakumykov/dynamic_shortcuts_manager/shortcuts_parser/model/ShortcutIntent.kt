@@ -1,7 +1,6 @@
-package com.github.aakumykov.kotlin_playground.shortcuts_parser.model
+package com.github.aakumykov.dynamic_shortcuts_manager.shortcuts_parser.model
 
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 
 data class ShortcutIntent(
