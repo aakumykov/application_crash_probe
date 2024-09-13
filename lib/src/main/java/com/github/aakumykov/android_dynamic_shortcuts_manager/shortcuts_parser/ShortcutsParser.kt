@@ -1,10 +1,14 @@
 package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser
 
 import android.content.Context
+import android.content.res.Resources
 import androidx.annotation.RawRes
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.RawShortcutResolver
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ResourceResolver
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsSAXHandler
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsXMLRawParser
+import javax.xml.parsers.SAXParserFactory
 
 class ShortcutsParser(
     private val shortcutsXMLRawParser: ShortcutsXMLRawParser,
@@ -20,5 +24,15 @@ class ShortcutsParser(
                     rawShortcutResolver.resolveRawShortcut(context,rawShortcut)
                 }
             }
+    }
+
+    companion object {
+        @JvmStatic
+        fun getDefault(packageName: String, resources: Resources): ShortcutsParser {
+            return ShortcutsParser(
+                ShortcutsXMLRawParser(SAXParserFactory.newInstance().newSAXParser(), ShortcutsSAXHandler()),
+                RawShortcutResolver(ResourceResolver(packageName, resources))
+            )
+        }
     }
 }
