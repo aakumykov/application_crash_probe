@@ -39,8 +39,6 @@ class MainActivity : AppCompatActivity() {
         binding.button2.setOnClickListener { readShortcutsXML() }
         binding.button3.setOnClickListener { createShortcuts() }
         binding.button4.setOnClickListener { removeShortcuts() }
-
-        Logger.d(TAG, "Максимум ярлыков: ${dynamicShortcutManager.maxSupportedShortcutsCount}")
     }
 
 
@@ -99,24 +97,24 @@ class MainActivity : AppCompatActivity() {
         shortcuts?.also { list ->
             dynamicShortcutManager.removeDynamicShortcuts(list)
 
-            val maxShortcutsCount = dynamicShortcutManager.maxSupportedShortcutsCount
-
-            if (0 == maxShortcutsCount) {
+            if (!dynamicShortcutManager.isDynamicShortcutsSupported()) {
                 showToast("Динамические ярлыки не поддерживаются!")
                 return@also
             }
 
             val listOf4: MutableList<Shortcut> = list.toMutableList();
 
-            while (listOf4.size > maxShortcutsCount)
+            while (listOf4.size > DynamicShortcutManager.DEFAULT_MAX_SHORTCUTS_COUNT)
                 listOf4.removeAt(Random.nextInt(0, listOf4.size))
 
             try {
                 dynamicShortcutManager.createDynamicShortcuts(listOf4)
                 Logger.d(TAG,"Ярлыки обновлены (пересозданы?)")
             } catch (e: Exception) {
-                showToast("Ошибка")
-                Logger.d(TAG, ExceptionUtils.getErrorMessage(e))
+                ExceptionUtils.getErrorMessage(e).also { errorMsg ->
+                    showToast("Ошибка: $errorMsg")
+                    Logger.e(TAG, errorMsg, e)
+                }
             }
 
         } ?: run {

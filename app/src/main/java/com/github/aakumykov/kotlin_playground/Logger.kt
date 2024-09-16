@@ -26,4 +26,9 @@ object Logger {
     private fun postNewList() {
         _messageListMutableLiveData.postValue(messageList)
     }
+
+    fun e(tag: String, errorMsg: String, e: Exception) {
+        Logger.d(tag, errorMsg)
+        Log.e(tag, errorMsg, e)
+    }
 }
