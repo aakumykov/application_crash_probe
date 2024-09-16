@@ -9,12 +9,11 @@ import androidx.core.graphics.drawable.IconCompat
 
 data class Shortcut(
     val shortcutId: String,
-    val enabled: Boolean,
     @DrawableRes val icon: Int,
     @StringRes val shortcutShortLabel: Int,
-    @StringRes val shortcutLongLabel: Int? = null,
-    @StringRes val shortcutDisabledMessage: Int? = null,
-    val intent: Intent?,
+    @StringRes var shortcutLongLabel: Int? = null,
+    @StringRes var shortcutDisabledMessage: Int? = null,
+    var intent: Intent?,
 )
 
 fun Shortcut.toShortcutInfo(context: Context): ShortcutInfoCompat {
