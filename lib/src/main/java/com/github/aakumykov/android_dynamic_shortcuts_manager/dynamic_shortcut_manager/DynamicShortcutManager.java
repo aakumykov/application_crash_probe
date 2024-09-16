@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DynamicShortcutManager {
 
-    private static final int DEFAULT_MAX_SHORTCUTS_COUNT = 4;
+    public static final int DEFAULT_MAX_SHORTCUTS_COUNT = 4;
 
     private final Context context;
     private final int maxSupportedShortcutsCount;
