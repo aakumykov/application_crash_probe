@@ -21,11 +21,7 @@ import kotlin.random.Random
 class MainActivity : AppCompatActivity() {
 
     private var shortcuts: List<Shortcut>? = null
-    private val dynamicShortcutManager by lazy {
-        DynamicShortcutManager(
-            this
-        )
-    }
+    private val dynamicShortcutManager by lazy { DynamicShortcutManager(this, 4) }
 
     private lateinit var binding: ActivityMainBinding
 
