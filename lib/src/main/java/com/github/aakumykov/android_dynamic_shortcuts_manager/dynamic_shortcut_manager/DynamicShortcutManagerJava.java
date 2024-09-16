@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DynamicShortcutManagerJava {
 
-    // TODO: getMaxShortcutCountPerActivity
+    // TODO: ShortcutManagerCompat.getMaxShortcutCountPerActivity()
 
     private final Context context;
 
