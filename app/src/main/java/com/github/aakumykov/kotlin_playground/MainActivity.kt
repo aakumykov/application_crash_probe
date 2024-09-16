@@ -8,7 +8,7 @@ import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.m
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.RawShortcutResolverJava
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ResourceResolverJava
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsSAXHandler
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsXMLRawParser
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsXMLRawParserJava
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.extensions.showAppProperties
 import com.github.aakumykov.kotlin_playground.extensions.showToast
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     private fun readShortcutsXML() {
 
         ShortcutsParser(
-            ShortcutsXMLRawParser(SAXParserFactory.newInstance().newSAXParser(), ShortcutsSAXHandler()),
+            ShortcutsXMLRawParserJava(SAXParserFactory.newInstance().newSAXParser(), ShortcutsSAXHandler()),
             RawShortcutResolverJava(ResourceResolverJava(packageName, resources))
         )
             .parse(this, R.raw.shortcuts)
