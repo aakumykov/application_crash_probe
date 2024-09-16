@@ -3,7 +3,7 @@ package com.github.aakumykov.kotlin_playground
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.android_dynamic_shortcuts_manager.dynamic_shortcut_manager.DynamicShortcutManager
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.ShortcutsParser
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.ShortcutsParserJava
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.RawShortcutResolverJava
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ResourceResolverJava
@@ -63,21 +63,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun readShortcutsXML() {
 
-        ShortcutsParser(
-            ShortcutsXMLRawParserJava(SAXParserFactory.newInstance().newSAXParser(), ShortcutsSAXHandler()),
-            RawShortcutResolverJava(ResourceResolverJava(packageName, resources))
-        )
-            .parse(this, R.raw.shortcuts)
-            .onSuccess {  shortcutList ->
-                this@MainActivity.shortcuts = shortcutList
-                Logger.d(TAG,"XML ярлыков прочитан")
+        try {
+            shortcuts = ShortcutsParserJava(
+                ShortcutsXMLRawParserJava(
+                    SAXParserFactory.newInstance().newSAXParser(),
+                    ShortcutsSAXHandler()
+                ),
+                RawShortcutResolverJava(ResourceResolverJava(packageName, resources))
+            )
+                .parse(resources, R.raw.shortcuts)
+
+            Logger.d(TAG,"XML ярлыков прочитан")
+        }
+        catch (e: Exception) {
+            ExceptionUtils.getErrorMessage(e).also { errorMsg ->
+                showToast(errorMsg)
+                Logger.d(TAG, errorMsg)
             }
-            .onFailure {
-                ExceptionUtils.getErrorMessage(it).also { errorMsg ->
-                    showToast(errorMsg)
-                    Logger.d(TAG, errorMsg)
-                }
-            }
+        }
     }
 
     private fun createShortcuts() {
