@@ -14,6 +14,7 @@ import com.github.aakumykov.kotlin_playground.extensions.showAppProperties
 import com.github.aakumykov.kotlin_playground.extensions.showToast
 import com.gitlab.aakumykov.exception_utils_module.ExceptionUtils
 import javax.xml.parsers.SAXParserFactory
+import kotlin.math.max
 import kotlin.random.Random
 
 
@@ -42,6 +43,8 @@ class MainActivity : AppCompatActivity() {
         binding.button2.setOnClickListener { readShortcutsXML() }
         binding.button3.setOnClickListener { createShortcuts() }
         binding.button4.setOnClickListener { removeShortcuts() }
+
+        Logger.d(TAG, "Максимум ярлыков: ${dynamicShortcutManager.maxSupportedShortcutsCount}")
     }
 
 
@@ -100,9 +103,17 @@ class MainActivity : AppCompatActivity() {
         shortcuts?.also { list ->
             dynamicShortcutManager.removeDynamicShortcuts(list)
 
-            val listOf4: List<Shortcut> = list.toMutableList().apply {
-                removeAt(Random.nextInt(0, this.size))
+            val maxShortcutsCount = dynamicShortcutManager.maxSupportedShortcutsCount
+
+            if (0 == maxShortcutsCount) {
+                showToast("Динамические ярлыки не поддерживаются!")
+                return@also
             }
+
+            val listOf4: MutableList<Shortcut> = list.toMutableList();
+
+            while (listOf4.size > maxShortcutsCount)
+                listOf4.removeAt(Random.nextInt(0, listOf4.size))
 
             try {
                 dynamicShortcutManager.createDynamicShortcuts(listOf4)

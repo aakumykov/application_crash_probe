@@ -12,8 +12,6 @@ import java.util.List;
 
 public class DynamicShortcutManager {
 
-    // TODO: ShortcutManagerCompat.getMaxShortcutCountPerActivity()
-
     private final Context context;
 
     public DynamicShortcutManager(Context context) {
@@ -34,5 +32,9 @@ public class DynamicShortcutManager {
             idList.add(shortcut.shortcutId);
         }
         ShortcutManagerCompat.removeDynamicShortcuts(context, idList);
+    }
+
+    public int getMaxSupportedShortcutsCount() {
+        return ShortcutManagerCompat.getMaxShortcutCountPerActivity(context);
     }
 }
