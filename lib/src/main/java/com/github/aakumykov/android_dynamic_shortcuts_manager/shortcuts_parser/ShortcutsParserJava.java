@@ -8,7 +8,7 @@ import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.m
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutJava;
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.RawShortcutResolverJava;
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ResourceResolverJava;
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsSAXHandler;
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsSAXHandlerJava;
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsXMLRawParserJava;
 
 import org.xml.sax.SAXException;
@@ -35,7 +35,7 @@ public class ShortcutsParserJava {
         return new ShortcutsParserJava(
                 new ShortcutsXMLRawParserJava(
                         SAXParserFactory.newInstance().newSAXParser(),
-                        new ShortcutsSAXHandler()
+                        new ShortcutsSAXHandlerJava()
                 ),
                 new RawShortcutResolverJava(new ResourceResolverJava(packageName, resources))
         );

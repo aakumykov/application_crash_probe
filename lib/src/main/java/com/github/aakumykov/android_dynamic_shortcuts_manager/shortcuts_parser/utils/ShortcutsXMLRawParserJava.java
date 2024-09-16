@@ -10,9 +10,9 @@ import javax.xml.parsers.SAXParser;
 public class ShortcutsXMLRawParserJava {
 
     private final SAXParser saxParser;
-    private final ShortcutsSAXHandler shortcutsSAXHandler;
+    private final ShortcutsSAXHandlerJava shortcutsSAXHandler;
 
-    public ShortcutsXMLRawParserJava(SAXParser saxParser, ShortcutsSAXHandler shortcutsSAXHandler) {
+    public ShortcutsXMLRawParserJava(SAXParser saxParser, ShortcutsSAXHandlerJava shortcutsSAXHandler) {
         this.saxParser = saxParser;
         this.shortcutsSAXHandler = shortcutsSAXHandler;
     }
