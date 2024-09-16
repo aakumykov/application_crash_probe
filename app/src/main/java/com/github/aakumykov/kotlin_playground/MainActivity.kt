@@ -81,6 +81,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createShortcuts() {
+
+        if (null == shortcuts)
+            readShortcutsXML()
+
         shortcuts?.also { list ->
             dynamicShortcutManager.removeDynamicShortcuts(list)
 
@@ -100,6 +104,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun removeShortcuts() {
+
+        if (null == shortcuts)
+            readShortcutsXML()
+
         shortcuts?.also { list ->
             dynamicShortcutManager.removeDynamicShortcuts(list)
             showToast("Ярлыки должны быть удалены")
