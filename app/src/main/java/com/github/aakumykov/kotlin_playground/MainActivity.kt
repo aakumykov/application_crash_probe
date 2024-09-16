@@ -2,7 +2,7 @@ package com.github.aakumykov.kotlin_playground
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.github.aakumykov.android_dynamic_shortcuts_manager.dynamic_shortcut_manager.DynamicShortcutManager
+import com.github.aakumykov.android_dynamic_shortcuts_manager.dynamic_shortcut_manager.DynamicShortcutManagerJava
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.ShortcutsParserJava
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutJava
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.RawShortcutResolverJava
@@ -20,7 +20,7 @@ import kotlin.random.Random
 class MainActivity : AppCompatActivity() {
 
     private var shortcuts: List<ShortcutJava>? = null
-    private val dynamicShortcutManager by lazy { DynamicShortcutManager(this) }
+    private val dynamicShortcutManager by lazy { DynamicShortcutManagerJava(this) }
 
     private lateinit var binding: ActivityMainBinding
 
@@ -95,12 +95,14 @@ class MainActivity : AppCompatActivity() {
                 removeAt(Random.nextInt(0, this.size))
             }
 
-            dynamicShortcutManager.createDynamicShortcuts(listOf4)
-                .onSuccess { Logger.d(TAG,"Ярлыки обновлены (пересозданы?)") }
-                .onFailure {
-                    showToast("Ошибка")
-                    Logger.d(TAG, ExceptionUtils.getErrorMessage(it))
-                }
+            try {
+                dynamicShortcutManager.createDynamicShortcuts(listOf4)
+                Logger.d(TAG,"Ярлыки обновлены (пересозданы?)")
+            } catch (e: Exception) {
+                showToast("Ошибка")
+                Logger.d(TAG, ExceptionUtils.getErrorMessage(e))
+            }
+
         } ?: run {
             showToast("Прочитайте файл ярлыков")
         }
