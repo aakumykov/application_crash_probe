@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             dynamicShortcutManager.createDynamicShortcuts(listOf4)
-                .onSuccess { showToast("Ярлыки обновлены (пересозданы?)") }
+                .onSuccess { Logger.d(TAG,"Ярлыки обновлены (пересозданы?)") }
                 .onFailure {
                     showToast("Ошибка")
                     Logger.d(TAG, ExceptionUtils.getErrorMessage(it))
@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
 
         shortcuts?.also { list ->
             dynamicShortcutManager.removeDynamicShortcuts(list)
-            showToast("Ярлыки должны быть удалены")
+            Logger.d(TAG,"Ярлыки должны быть удалены")
         } ?: run {
             showToast("Прочитайте файл ярлыков")
         }

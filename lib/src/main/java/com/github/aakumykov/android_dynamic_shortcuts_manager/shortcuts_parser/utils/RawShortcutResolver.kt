@@ -3,7 +3,6 @@ package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.
 import android.content.Context
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcutJava
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.toIntent
 
 class RawShortcutResolver(private val resourceResolver: ResourceResolver) {
 
