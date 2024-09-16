@@ -1,10 +1,7 @@
 package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils
 
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcutJava
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntent
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntent.Companion.ATTR_ACTION
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntent.Companion.ATTR_TARGET_CLASS
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntent.Companion.ATTR_TARGET_PACKAGE
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntentJava
 import org.xml.sax.Attributes
 import org.xml.sax.SAXException
 import org.xml.sax.helpers.DefaultHandler
@@ -37,10 +34,10 @@ class ShortcutsSAXHandler : DefaultHandler() {
                     ))
             }
             INTENT -> {
-                rawShortcuts.last().shortcutIntent = ShortcutIntent(
-                    action = attributes.getValue(ATTR_ACTION),
-                    targetPackage = attributes.getValue(ATTR_TARGET_PACKAGE),
-                    targetClass = attributes.getValue(ATTR_TARGET_CLASS)
+                rawShortcuts.last().shortcutIntent = ShortcutIntentJava(
+                    attributes.getValue(ShortcutIntentJava.ATTR_ACTION),
+                    attributes.getValue(ShortcutIntentJava.ATTR_TARGET_PACKAGE),
+                    attributes.getValue(ShortcutIntentJava.ATTR_TARGET_CLASS)
                 )
             }
         }

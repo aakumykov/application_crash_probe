@@ -13,7 +13,7 @@ public class RawShortcutJava {
     public final Boolean enabled;
     public final String icon;
     public final String shortcutShortLabel;
-    @Nullable public ShortcutIntent shortcutIntent;
+    @Nullable public ShortcutIntentJava shortcutIntent;
 
     public RawShortcutJava(String shortcutId, Boolean enabled, String icon, String shortcutShortLabel) {
         this.shortcutId = shortcutId;
@@ -22,7 +22,7 @@ public class RawShortcutJava {
         this.shortcutShortLabel = shortcutShortLabel;
     }
 
-    public void setShortcutIntent(@Nullable ShortcutIntent shortcutIntent) {
+    public void setShortcutIntent(@Nullable ShortcutIntentJava shortcutIntent) {
         this.shortcutIntent = shortcutIntent;
     }
 }
