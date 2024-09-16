@@ -1,10 +1,6 @@
 package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils
 
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut.Companion.ATTR_ENABLED
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut.Companion.ATTR_ICON
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut.Companion.ATTR_SHORTCUT_ID
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut.Companion.ATTR_SHORTCUT_SHORT_LABEL
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcutJava
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntent
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntent.Companion.ATTR_ACTION
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntent.Companion.ATTR_TARGET_CLASS
@@ -15,7 +11,7 @@ import org.xml.sax.helpers.DefaultHandler
 
 class ShortcutsSAXHandler : DefaultHandler() {
 
-    private lateinit var rawShortcuts: MutableList<RawShortcut>
+    private lateinit var rawShortcuts: MutableList<RawShortcutJava>
     private val elementValue: StringBuilder = StringBuilder()
 
     @Throws(SAXException::class)
@@ -33,13 +29,12 @@ class ShortcutsSAXHandler : DefaultHandler() {
         when (qName) {
             SHORTCUT -> {
                 rawShortcuts.add(
-                    RawShortcut(
-                    shortcutId = attributes.getValue(ATTR_SHORTCUT_ID),
-                    icon = attributes.getValue(ATTR_ICON),
-                    enabled = attributes.getValue(ATTR_ENABLED).toBoolean(),
-                    shortcutShortLabel = attributes.getValue(ATTR_SHORTCUT_SHORT_LABEL)
-                )
-                )
+                    RawShortcutJava(
+                        attributes.getValue(RawShortcutJava.ATTR_SHORTCUT_ID),
+                        attributes.getValue(RawShortcutJava.ATTR_ENABLED).toBoolean(),
+                        attributes.getValue(RawShortcutJava.ATTR_ICON),
+                        attributes.getValue(RawShortcutJava.ATTR_SHORTCUT_SHORT_LABEL)
+                    ))
             }
             INTENT -> {
                 rawShortcuts.last().shortcutIntent = ShortcutIntent(
@@ -51,7 +46,7 @@ class ShortcutsSAXHandler : DefaultHandler() {
         }
     }
 
-    fun getShortcuts(): List<RawShortcut> = rawShortcuts
+    fun getShortcuts(): List<RawShortcutJava> = rawShortcuts
 
     companion object {
         const val SHORTCUT = "shortcut"
