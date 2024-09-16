@@ -2,7 +2,7 @@ package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.
 
 import android.content.res.Resources;
 
-public class ResourceResolverJava {
+public class ResourceResolver {
 
     private static final String RES_TYPE_STRING = "string";
     private static final String RES_TYPE_DRAWABLE = "drawable";
@@ -10,7 +10,7 @@ public class ResourceResolverJava {
     private final String packageName;
     private final Resources resources;
 
-    public ResourceResolverJava(String packageName, Resources resources) {
+    public ResourceResolver(String packageName, Resources resources) {
         this.packageName = packageName;
         this.resources = resources;
     }

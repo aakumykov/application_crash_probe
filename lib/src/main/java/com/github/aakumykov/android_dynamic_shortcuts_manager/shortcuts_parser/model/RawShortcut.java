@@ -1,10 +1,8 @@
 package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model;
 
-import android.content.Intent;
-
 import androidx.annotation.Nullable;
 
-public class RawShortcutJava {
+public class RawShortcut {
 
     public static final String ATTR_SHORTCUT_ID = "shortcutId";
     public static final String ATTR_ENABLED = "enabled";
@@ -17,16 +15,16 @@ public class RawShortcutJava {
     public final String shortcutShortLabel;
     @Nullable public String shortcutLongLabel;
     @Nullable public String shortcutDisabledMessage;
-    @Nullable public ShortcutIntentJava shortcutIntent;
+    @Nullable public ShortcutIntent shortcutIntent;
 
-    public RawShortcutJava(String shortcutId, Boolean enabled, String icon, String shortcutShortLabel) {
+    public RawShortcut(String shortcutId, Boolean enabled, String icon, String shortcutShortLabel) {
         this.shortcutId = shortcutId;
         this.enabled = enabled;
         this.icon = icon;
         this.shortcutShortLabel = shortcutShortLabel;
     }
 
-    public void setShortcutIntent(@Nullable ShortcutIntentJava shortcutIntent) {
+    public void setShortcutIntent(@Nullable ShortcutIntent shortcutIntent) {
         this.shortcutIntent = shortcutIntent;
     }
 

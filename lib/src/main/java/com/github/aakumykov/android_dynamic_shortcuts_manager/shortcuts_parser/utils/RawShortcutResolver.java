@@ -1,19 +1,19 @@
 package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils;
 
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcutJava;
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutJava;
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut;
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut;
 
-public class RawShortcutResolverJava {
+public class RawShortcutResolver {
 
-    private final ResourceResolverJava resourceResolver;
+    private final ResourceResolver resourceResolver;
 
-    public RawShortcutResolverJava(ResourceResolverJava resourceResolverJava) {
-        this.resourceResolver = resourceResolverJava;
+    public RawShortcutResolver(ResourceResolver resourceResolver) {
+        this.resourceResolver = resourceResolver;
     }
 
-    public ShortcutJava resolveRawShortcut(RawShortcutJava rawShortcut) {
+    public Shortcut resolveRawShortcut(RawShortcut rawShortcut) {
 
-        ShortcutJava shortcut = new ShortcutJava(
+        Shortcut shortcut = new Shortcut(
                 rawShortcut.shortcutId,
                 resourceResolver.getDrawableResourceByName(rawShortcut.icon),
                 resourceResolver.getStringResourceByName(rawShortcut.shortcutShortLabel)

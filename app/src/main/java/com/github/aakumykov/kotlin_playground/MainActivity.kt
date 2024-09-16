@@ -2,13 +2,13 @@ package com.github.aakumykov.kotlin_playground
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.github.aakumykov.android_dynamic_shortcuts_manager.dynamic_shortcut_manager.DynamicShortcutManagerJava
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.ShortcutsParserJava
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutJava
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.RawShortcutResolverJava
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ResourceResolverJava
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsSAXHandlerJava
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsXMLRawParserJava
+import com.github.aakumykov.android_dynamic_shortcuts_manager.dynamic_shortcut_manager.DynamicShortcutManager
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.ShortcutsParser
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.RawShortcutResolver
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ResourceResolver
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsSAXHandler
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsXMLRawParser
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.extensions.showAppProperties
 import com.github.aakumykov.kotlin_playground.extensions.showToast
@@ -19,8 +19,12 @@ import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
-    private var shortcuts: List<ShortcutJava>? = null
-    private val dynamicShortcutManager by lazy { DynamicShortcutManagerJava(this) }
+    private var shortcuts: List<Shortcut>? = null
+    private val dynamicShortcutManager by lazy {
+        DynamicShortcutManager(
+            this
+        )
+    }
 
     private lateinit var binding: ActivityMainBinding
 
@@ -64,12 +68,17 @@ class MainActivity : AppCompatActivity() {
     private fun readShortcutsXML() {
 
         try {
-            shortcuts = ShortcutsParserJava(
-                ShortcutsXMLRawParserJava(
+            shortcuts = ShortcutsParser(
+                ShortcutsXMLRawParser(
                     SAXParserFactory.newInstance().newSAXParser(),
-                    ShortcutsSAXHandlerJava()
+                    ShortcutsSAXHandler()
                 ),
-                RawShortcutResolverJava(ResourceResolverJava(packageName, resources))
+                RawShortcutResolver(
+                    ResourceResolver(
+                        packageName,
+                        resources
+                    )
+                )
             )
                 .parse(resources, R.raw.shortcuts)
 
@@ -91,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         shortcuts?.also { list ->
             dynamicShortcutManager.removeDynamicShortcuts(list)
 
-            val listOf4: List<ShortcutJava> = list.toMutableList().apply {
+            val listOf4: List<Shortcut> = list.toMutableList().apply {
                 removeAt(Random.nextInt(0, this.size))
             }
 

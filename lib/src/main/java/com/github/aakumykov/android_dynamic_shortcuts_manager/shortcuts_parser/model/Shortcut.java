@@ -9,7 +9,7 @@ import androidx.annotation.StringRes;
 import androidx.core.content.pm.ShortcutInfoCompat;
 import androidx.core.graphics.drawable.IconCompat;
 
-public class ShortcutJava {
+public class Shortcut {
 
     public final String shortcutId;
     @DrawableRes public final int icon;
@@ -19,7 +19,7 @@ public class ShortcutJava {
     @StringRes @Nullable public Integer shortcutDisabledMessage;
     @Nullable public Intent shortcutIntent;
 
-    public ShortcutJava(String shortcutId, int icon, int shortcutShortLabel) {
+    public Shortcut(String shortcutId, int icon, int shortcutShortLabel) {
         this.shortcutId = shortcutId;
         this.icon = icon;
         this.shortcutShortLabel = shortcutShortLabel;

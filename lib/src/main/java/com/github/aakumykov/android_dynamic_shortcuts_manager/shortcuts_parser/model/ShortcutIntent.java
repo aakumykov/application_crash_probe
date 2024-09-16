@@ -3,7 +3,7 @@ package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.
 import android.content.ComponentName;
 import android.content.Intent;
 
-public class ShortcutIntentJava {
+public class ShortcutIntent {
 
     public static final String ATTR_ACTION = "action";
     public static final String ATTR_TARGET_PACKAGE = "targetPackage";
@@ -13,7 +13,7 @@ public class ShortcutIntentJava {
     public final String targetPackage;
     public final String targetClass;
 
-    public ShortcutIntentJava(String action, String targetPackage, String targetClass) {
+    public ShortcutIntent(String action, String targetPackage, String targetClass) {
         this.action = action;
         this.targetPackage = targetPackage;
         this.targetClass = targetClass;
