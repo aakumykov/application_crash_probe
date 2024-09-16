@@ -2,16 +2,15 @@ package com.github.aakumykov.android_dynamic_shortcuts_manager.dynamic_shortcut_
 
 import android.content.Context
 import androidx.core.content.pm.ShortcutManagerCompat
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.toShortcutInfo
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutJava
 
 class DynamicShortcutManager(private val context: Context) {
 
     /**
-     * @param List of [Shortcut] objects. Must be <= 4.
+     * @param List of [ShortcutJava] objects. Must be <= 4.
      * @return Number of created shortcuts.
      */
-    fun createDynamicShortcuts(list: List<Shortcut>): Result<Int> {
+    fun createDynamicShortcuts(list: List<ShortcutJava>): Result<Int> {
         return list.map { shortcutList ->
             shortcutList.toShortcutInfo(context)
         }
@@ -26,7 +25,7 @@ class DynamicShortcutManager(private val context: Context) {
             }
     }
 
-    fun removeDynamicShortcuts(list: List<Shortcut>) {
+    fun removeDynamicShortcuts(list: List<ShortcutJava>) {
         list.map { it.shortcutId }.also { idList ->
             ShortcutManagerCompat.removeDynamicShortcuts(context, idList)
         }

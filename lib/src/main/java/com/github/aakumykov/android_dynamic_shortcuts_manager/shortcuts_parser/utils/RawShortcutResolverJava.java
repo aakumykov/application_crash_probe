@@ -1,7 +1,7 @@
 package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils;
 
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcutJava;
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut;
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutJava;
 
 public class RawShortcutResolverJava {
 
@@ -11,19 +11,25 @@ public class RawShortcutResolverJava {
         this.resourceResolver = resourceResolverJava;
     }
 
-    public Shortcut resolveRawShortcut(RawShortcutJava rawShortcut) {
+    public ShortcutJava resolveRawShortcut(RawShortcutJava rawShortcut) {
 
-        Shortcut shortcut = new Shortcut(
+        ShortcutJava shortcut = new ShortcutJava(
                 rawShortcut.shortcutId,
                 resourceResolver.getDrawableResourceByName(rawShortcut.icon),
-                resourceResolver.getStringResourceByName(rawShortcut.shortcutShortLabel),
-                null,
-                null,
-                null
+                resourceResolver.getStringResourceByName(rawShortcut.shortcutShortLabel)
         );
 
+        // Long label
+        if (null != rawShortcut.shortcutLongLabel)
+            shortcut.shortcutLongLabel = resourceResolver.getStringResourceByName(rawShortcut.shortcutLongLabel);
+
+        // Disabled message
+        if (null != rawShortcut.shortcutDisabledMessage)
+            shortcut.shortcutDisabledMessage = resourceResolver.getStringResourceByName(rawShortcut.shortcutDisabledMessage);
+
+        // Intent
         if (null != rawShortcut.shortcutIntent)
-            shortcut.setIntent(rawShortcut.shortcutIntent.toIntent());
+            shortcut.shortcutIntent = rawShortcut.shortcutIntent.toIntent();
 
         return shortcut;
     }

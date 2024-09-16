@@ -5,7 +5,7 @@ import android.content.res.Resources;
 import androidx.annotation.RawRes;
 
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcutJava;
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut;
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutJava;
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.RawShortcutResolverJava;
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ResourceResolverJava;
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsSAXHandler;
@@ -41,11 +41,11 @@ public class ShortcutsParserJava {
         );
     }
 
-    public List<Shortcut> parse(Resources resources, @RawRes int shortcutsXMLRawResource) throws SAXException, IOException {
+    public List<ShortcutJava> parse(Resources resources, @RawRes int shortcutsXMLRawResource) throws SAXException, IOException {
 
         try (InputStream shortcutsXMLInputStream = resources.openRawResource(shortcutsXMLRawResource)) {
             List<RawShortcutJava> rawShortcutJavaList = shortcutsXMLRawParser.parse(shortcutsXMLInputStream);
-            List<Shortcut> shortcutList = new ArrayList<>();
+            List<ShortcutJava> shortcutList = new ArrayList<>();
             for (RawShortcutJava rawShortcut : rawShortcutJavaList) {
                 shortcutList.add(rawShortcutResolver.resolveRawShortcut(rawShortcut));
             }

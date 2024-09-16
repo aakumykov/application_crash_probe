@@ -15,9 +15,9 @@ public class ShortcutJava {
     @DrawableRes public final int icon;
     @StringRes public final int shortcutShortLabel;
 
-    @StringRes @Nullable Integer shortcutLongLabel;
-    @StringRes @Nullable Integer shortcutDisabledMessage;
-    @Nullable public Intent intent;
+    @StringRes @Nullable public Integer shortcutLongLabel;
+    @StringRes @Nullable public Integer shortcutDisabledMessage;
+    @Nullable public Intent shortcutIntent;
 
     public ShortcutJava(String shortcutId, int icon, int shortcutShortLabel) {
         this.shortcutId = shortcutId;
@@ -31,11 +31,17 @@ public class ShortcutJava {
         builder.setShortLabel(context.getString(shortcutShortLabel));
         builder.setIcon(IconCompat.createWithResource(context, icon));
 
+        // Long label
         if (null != shortcutLongLabel)
             builder.setLongLabel(context.getString(shortcutLongLabel));
 
+        // Disabled message
         if (null != shortcutDisabledMessage)
             builder.setDisabledMessage(context.getString(shortcutDisabledMessage));
+
+        // Shortcut intent
+        if (null != shortcutIntent)
+            builder.setIntent(shortcutIntent);
 
         return builder.build();
     }

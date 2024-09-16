@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.android_dynamic_shortcuts_manager.dynamic_shortcut_manager.DynamicShortcutManager
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.ShortcutsParserJava
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutJava
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.RawShortcutResolverJava
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ResourceResolverJava
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsSAXHandler
@@ -19,7 +19,7 @@ import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
-    private var shortcuts: List<Shortcut>? = null
+    private var shortcuts: List<ShortcutJava>? = null
     private val dynamicShortcutManager by lazy { DynamicShortcutManager(this) }
 
     private lateinit var binding: ActivityMainBinding
@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         shortcuts?.also { list ->
             dynamicShortcutManager.removeDynamicShortcuts(list)
 
-            val listOf4: List<Shortcut> = list.toMutableList().apply {
+            val listOf4: List<ShortcutJava> = list.toMutableList().apply {
                 removeAt(Random.nextInt(0, this.size))
             }
 
