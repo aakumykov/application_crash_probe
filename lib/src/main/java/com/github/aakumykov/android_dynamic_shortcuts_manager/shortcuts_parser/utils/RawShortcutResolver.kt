@@ -4,7 +4,7 @@ import android.content.Context
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcutJava
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut
 
-class RawShortcutResolver(private val resourceResolver: ResourceResolver) {
+class RawShortcutResolver(private val resourceResolver: ResourceResolverJava) {
 
     fun resolveRawShortcut(context: Context, rawShortcut: RawShortcutJava): Shortcut {
         return Shortcut(

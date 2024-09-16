@@ -2,16 +2,16 @@ package com.github.aakumykov.kotlin_playground
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.android_dynamic_shortcuts_manager.dynamic_shortcut_manager.DynamicShortcutManager
-import com.github.aakumykov.kotlin_playground.extensions.showAppProperties
-import com.github.aakumykov.kotlin_playground.extensions.showToast
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsSAXHandler
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.ShortcutsParser
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsXMLRawParser
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.RawShortcutResolver
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ResourceResolver
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ResourceResolverJava
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsSAXHandler
+import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsXMLRawParser
+import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
+import com.github.aakumykov.kotlin_playground.extensions.showAppProperties
+import com.github.aakumykov.kotlin_playground.extensions.showToast
 import com.gitlab.aakumykov.exception_utils_module.ExceptionUtils
 import javax.xml.parsers.SAXParserFactory
 import kotlin.random.Random
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         ShortcutsParser(
             ShortcutsXMLRawParser(SAXParserFactory.newInstance().newSAXParser(), ShortcutsSAXHandler()),
-            RawShortcutResolver(ResourceResolver(packageName, resources))
+            RawShortcutResolver(ResourceResolverJava(packageName, resources))
         )
             .parse(this, R.raw.shortcuts)
             .onSuccess {  shortcutList ->
