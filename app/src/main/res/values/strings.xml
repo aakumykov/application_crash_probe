@@ -6,4 +6,5 @@
     <string name="record_video">Запись видео</string>
     <string name="selfie">Селфи</string>
     <string name="camera">Камера</string>
+    <string name="settings">Settings</string>
 </resources>
