@@ -38,6 +38,11 @@ class MainActivity : AppCompatActivity() {
         binding.button2.setOnClickListener { readShortcutsXML() }
         binding.button3.setOnClickListener { createShortcuts() }
         binding.button4.setOnClickListener { removeShortcuts() }
+        binding.createDefaultShortcutsButton.setOnClickListener { createDefaultShortcuts() }
+    }
+
+    private fun createDefaultShortcuts() {
+
     }
 
 
@@ -104,8 +109,8 @@ class MainActivity : AppCompatActivity() {
 
             val listOf4: MutableList<Shortcut> = list.toMutableList()
 
-            while (listOf4.size > DynamicShortcutManager.DEFAULT_MAX_SHORTCUTS_COUNT)
-                listOf4.removeAt(Random.nextInt(0, listOf4.size))
+//            while (listOf4.size > DynamicShortcutManager.DEFAULT_MAX_SHORTCUTS_COUNT)
+//                listOf4.removeAt(Random.nextInt(0, listOf4.size))
 
             try {
                 dynamicShortcutManager.createDynamicShortcuts(listOf4)

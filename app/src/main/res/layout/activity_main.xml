@@ -42,6 +42,13 @@
             android:text="Прочитать shortcuts.xml"
             android:backgroundTint="#0097A7"/>
 
+        <Button
+            android:id="@+id/createDefaultShortcutsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Создать ярлыки по умолчанию"
+            android:backgroundTint="#FF7800"/>
+
         <LinearLayout
             android:id="@+id/horizontalButtonsContainer1"
             android:layout_width="match_parent"
