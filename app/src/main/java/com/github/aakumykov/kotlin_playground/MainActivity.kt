@@ -65,6 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         try {
             shortcuts = ShortcutsParser(
+                resources,
                 ShortcutsXMLRawParser(
                     SAXParserFactory.newInstance().newSAXParser(),
                     ShortcutsSAXHandler()
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
             )
-                .parse(resources, R.raw.shortcuts)
+                .parse(R.raw.shortcuts)
 
             Logger.d(TAG,"XML ярлыков прочитан")
         }

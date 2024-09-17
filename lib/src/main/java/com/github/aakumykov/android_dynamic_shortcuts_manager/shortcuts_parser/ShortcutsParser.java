@@ -25,14 +25,19 @@ public class ShortcutsParser {
 
     private final ShortcutsXMLRawParser shortcutsXMLRawParser;
     private final RawShortcutResolver rawShortcutResolver;
+    private final Resources resources;
 
-    public ShortcutsParser(ShortcutsXMLRawParser shortcutsXMLRawParser, RawShortcutResolver rawShortcutResolver) {
+    public ShortcutsParser(Resources resources,
+                           ShortcutsXMLRawParser shortcutsXMLRawParser,
+                           RawShortcutResolver rawShortcutResolver) {
+        this.resources = resources;
         this.shortcutsXMLRawParser = shortcutsXMLRawParser;
         this.rawShortcutResolver = rawShortcutResolver;
     }
 
     public static ShortcutsParser getDefault(String packageName, Resources resources) throws ParserConfigurationException, SAXException {
         return new ShortcutsParser(
+                resources,
                 new ShortcutsXMLRawParser(
                         SAXParserFactory.newInstance().newSAXParser(),
                         new ShortcutsSAXHandler()
@@ -41,7 +46,7 @@ public class ShortcutsParser {
         );
     }
 
-    public List<Shortcut> parse(Resources resources, @RawRes int shortcutsXMLRawResource) throws SAXException, IOException {
+    public List<Shortcut> parse(@RawRes int shortcutsXMLRawResource) throws SAXException, IOException {
 
         try (InputStream shortcutsXMLInputStream = resources.openRawResource(shortcutsXMLRawResource)) {
             List<RawShortcut> rawShortcutList = shortcutsXMLRawParser.parse(shortcutsXMLInputStream);
