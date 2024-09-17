@@ -10,11 +10,10 @@ import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.u
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsSAXHandler
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsXMLRawParser
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
+import com.github.aakumykov.kotlin_playground.extensions.getErrorMessage
 import com.github.aakumykov.kotlin_playground.extensions.showAppProperties
 import com.github.aakumykov.kotlin_playground.extensions.showToast
-import com.gitlab.aakumykov.exception_utils_module.ExceptionUtils
 import javax.xml.parsers.SAXParserFactory
-import kotlin.math.max
 import kotlin.random.Random
 
 
@@ -82,7 +81,7 @@ class MainActivity : AppCompatActivity() {
             Logger.d(TAG,"XML ярлыков прочитан")
         }
         catch (e: Exception) {
-            ExceptionUtils.getErrorMessage(e).also { errorMsg ->
+            e.getErrorMessage().also { errorMsg ->
                 showToast(errorMsg)
                 Logger.d(TAG, errorMsg)
             }
@@ -102,7 +101,7 @@ class MainActivity : AppCompatActivity() {
                 return@also
             }
 
-            val listOf4: MutableList<Shortcut> = list.toMutableList();
+            val listOf4: MutableList<Shortcut> = list.toMutableList()
 
             while (listOf4.size > DynamicShortcutManager.DEFAULT_MAX_SHORTCUTS_COUNT)
                 listOf4.removeAt(Random.nextInt(0, listOf4.size))
@@ -111,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                 dynamicShortcutManager.createDynamicShortcuts(listOf4)
                 Logger.d(TAG,"Ярлыки обновлены (пересозданы?)")
             } catch (e: Exception) {
-                ExceptionUtils.getErrorMessage(e).also { errorMsg ->
+                e.getErrorMessage().also { errorMsg ->
                     showToast("Ошибка: $errorMsg")
                     Logger.e(TAG, errorMsg, e)
                 }

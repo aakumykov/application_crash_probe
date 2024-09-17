@@ -52,6 +52,7 @@ public class DynamicShortcutManager {
         return ShortcutManagerCompat.getMaxShortcutCountPerActivity(context);
     }
 
+
     public boolean isDynamicShortcutsSupported() {
         return getMaxSupportedShortcutsCount() > 0;
     }
