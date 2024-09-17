@@ -30,6 +30,12 @@ public class DynamicShortcutManager {
     }
 
 
+    public void updateShortcuts(List<Shortcut> shortcutListToAdd, List<Shortcut> shortcutListToRemove) throws Exception {
+        removeDynamicShortcuts(shortcutListToRemove);
+        createDynamicShortcuts(shortcutListToAdd);
+    }
+
+
     public void createDynamicShortcuts(List<Shortcut> list) throws IllegalArgumentException {
         List<ShortcutInfoCompat> shortcutInfoCompatList = new ArrayList<>();
         for (Shortcut shortcut : list) {
