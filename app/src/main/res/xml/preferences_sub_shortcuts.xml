@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+        android:key="preference_shortcut_page_title"
+        android:selectable="false"
+        android:persistent="false"
+        android:title="@string/preference_shortcut_page_title"
+        android:summary="@string/preference_shortcut_page_title_summary"/>
+
+    <CheckBoxPreference
+        android:key="preference_shortcut_camera"
+        android:title="@string/preference_shortcut_camera"
+        android:summary="@string/preference_shortcut_camera_summary"
+        android:icon="@drawable/shortcut_ic_photo_camera_white_48dp"
+        android:defaultValue="false"
+        />
+
+    <CheckBoxPreference
+        android:key="preference_shortcut_video"
+        android:title="@string/preference_shortcut_video"
+        android:summary="@string/preference_shortcut_video_summary"
+        android:icon="@drawable/shortcut_ic_videocam_white_48dp"
+        android:defaultValue="true"
+        />
+
+    <CheckBoxPreference
+        android:key="preference_shortcut_gallery"
+        android:title="@string/preference_shortcut_gallery"
+        android:summary="@string/preference_shortcut_gallery_summary"
+        android:icon="@drawable/shortcut_gallery"
+        android:defaultValue="true"
+        />
+
+    <CheckBoxPreference
+        android:key="preference_shortcut_settings"
+        android:title="@string/preference_shortcut_settings"
+        android:summary="@string/preference_shortcut_settings_summary"
+        android:icon="@drawable/shortcut_settings"
+        android:defaultValue="true"
+        />
+
+    <CheckBoxPreference
+        android:key="preference_shortcut_selfie"
+        android:title="@string/preference_shortcut_selfie"
+        android:summary="@string/preference_shortcut_selfie_summary"
+        android:icon="@drawable/shortcut_ic_face_white_48dp"
+        android:defaultValue="true"
+        />
+
+</PreferenceScreen>

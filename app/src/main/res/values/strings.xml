@@ -7,4 +7,25 @@
     <string name="selfie">Селфи</string>
     <string name="camera">Камера</string>
     <string name="settings">Settings</string>
+
+    <string name="preference_screen_shortcuts">Настройки ярлыков</string>
+
+    <string name="preference_shortcut_page_title">Ярлыки быстрого запуска</string>
+    <string name="preference_shortcut_page_title_summary">Настройка ярлыков, содержащихся в значке приложения</string>
+
+    <string name="preference_shortcut_camera">Камера</string>
+    <string name="preference_shortcut_camera_summary">Добавить ярлык камеры в значок приложения</string>
+
+    <string name="preference_shortcut_video">Видео</string>
+    <string name="preference_shortcut_video_summary">Добавить ярлык видео к значку приложения</string>
+
+    <string name="preference_shortcut_gallery">Галерея</string>
+    <string name="preference_shortcut_gallery_summary">Добавить ярлык галереи к значку приложения</string>
+
+    <string name="preference_shortcut_selfie">Селфи</string>
+    <string name="preference_shortcut_selfie_summary">Добавить ярлык селфи к значку приложения</string>
+
+    <string name="preference_shortcut_settings">Настройки</string>
+    <string name="preference_shortcut_settings_summary">Добавить ярлык настроек к значку приложения</string>
+
 </resources>
