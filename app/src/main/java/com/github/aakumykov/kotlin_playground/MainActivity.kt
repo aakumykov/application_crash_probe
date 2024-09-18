@@ -1,6 +1,11 @@
 package com.github.aakumykov.kotlin_playground
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ListAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.android_dynamic_shortcuts_manager.DefaultShortcutsCreator
 import com.github.aakumykov.android_dynamic_shortcuts_manager.dynamic_shortcut_manager.DynamicShortcutManager
@@ -18,19 +23,37 @@ import javax.xml.parsers.SAXParserFactory
 import kotlin.random.Random
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     private var shortcuts: List<Shortcut>? = null
     private val dynamicShortcutManager by lazy { DynamicShortcutManager(this, 4) }
+    private val shortcutsParser: ShortcutsParser by lazy { ShortcutsParser.getDefault(packageName, resources) }
 
     private lateinit var binding: ActivityMainBinding
 
+    private val initialShortcuts: List<Shortcut> by lazy {
+        try {
+            shortcutsParser.parse(R.raw.shortcuts)
+        } catch (e: Exception) {
+            Log.e(TAG, e.getErrorMessage(), e)
+            emptyList()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        Logger.messages.observe(this) { messages -> binding.logView.text = messages.joinToString("\n") }
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val adapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice)
+
+        adapter.addAll(initialShortcuts.map { getString(it.shortcutShortLabel) })
+
+        binding.listView.apply {
+            this.adapter = adapter
+            this.onItemClickListener = this@MainActivity
+        }
 
         binding.appInfoButton.setOnClickListener { showAppProperties() }
         binding.clearLogButton.setOnClickListener { Logger.clear() }
@@ -43,6 +66,11 @@ class MainActivity : AppCompatActivity() {
 
         createDefaultShortcuts()
     }
+
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+    }
+
 
     private fun createDefaultShortcuts() {
         try {
