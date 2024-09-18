@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity() {
         binding.button3.setOnClickListener { createShortcuts() }
         binding.button4.setOnClickListener { removeShortcuts() }
         binding.createDefaultShortcutsButton.setOnClickListener { createDefaultShortcuts() }
+
+        createDefaultShortcuts()
     }
 
     private fun createDefaultShortcuts() {
