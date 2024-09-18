@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.github.aakumykov.kotlin_playground"
-        minSdk 15
+        minSdk 21
         targetSdk 34
         versionCode 1
         versionName "1.0"
@@ -41,6 +41,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.github.aakumykov:android_dynamic_shortcuts_manager:0.0.6-alpha'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -48,7 +49,6 @@ dependencies {
 
     androidTestImplementation 'androidx.test.uiautomator:uiautomator-v18:2.2.0-alpha1'
 
-    implementation project(':lib')
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.12'
 
