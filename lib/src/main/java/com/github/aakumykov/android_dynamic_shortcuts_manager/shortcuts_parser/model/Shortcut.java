@@ -12,6 +12,7 @@ import androidx.core.graphics.drawable.IconCompat;
 public class Shortcut {
 
     public final String shortcutId;
+    public final boolean enabled;
     @DrawableRes public final int icon;
     @StringRes public final int shortcutShortLabel;
 
@@ -19,8 +20,9 @@ public class Shortcut {
     @StringRes @Nullable public Integer shortcutDisabledMessage;
     @Nullable public Intent shortcutIntent;
 
-    public Shortcut(String shortcutId, int icon, int shortcutShortLabel) {
+    public Shortcut(String shortcutId, boolean enabled, int icon, int shortcutShortLabel) {
         this.shortcutId = shortcutId;
+        this.enabled = enabled;
         this.icon = icon;
         this.shortcutShortLabel = shortcutShortLabel;
     }

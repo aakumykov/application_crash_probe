@@ -15,6 +15,7 @@ public class RawShortcutResolver {
 
         Shortcut shortcut = new Shortcut(
                 rawShortcut.shortcutId,
+                rawShortcut.enabled,
                 resourceResolver.getDrawableResourceByName(rawShortcut.icon),
                 resourceResolver.getStringResourceByName(rawShortcut.shortcutShortLabel)
         );
