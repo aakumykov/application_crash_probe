@@ -2,6 +2,7 @@ package com.github.aakumykov.kotlin_playground
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.github.aakumykov.android_dynamic_shortcuts_manager.DefaultShortcutsCreator
 import com.github.aakumykov.android_dynamic_shortcuts_manager.dynamic_shortcut_manager.DynamicShortcutManager
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.ShortcutsParser
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut
@@ -42,7 +43,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createDefaultShortcuts() {
-
+        try {
+            DefaultShortcutsCreator.getDefault(this).initShortcuts(R.raw.shortcuts)
+            Logger.d(TAG, "Ярлыки инициализированы")
+        }
+        catch (e: Exception) {
+            Logger.e(TAG, e.getErrorMessage(), e)
+        }
     }
 
 

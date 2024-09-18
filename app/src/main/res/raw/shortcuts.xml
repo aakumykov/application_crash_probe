@@ -2,7 +2,7 @@
 
     <shortcut
         android:shortcutId="settings"
-        android:enabled="true"
+        android:enabled="false"
         android:icon="@drawable/shortcut_settings"
         android:shortcutShortLabel="@string/action_settings"
         >
@@ -15,7 +15,7 @@
 
     <shortcut
         android:shortcutId="gallery"
-        android:enabled="true"
+        android:enabled="false"
         android:icon="@drawable/shortcut_gallery"
         android:shortcutShortLabel="@string/gallery"
         >
@@ -28,7 +28,7 @@
 
     <shortcut
         android:shortcutId="video"
-        android:enabled="true"
+        android:enabled="false"
         android:icon="@drawable/shortcut_ic_videocam_white_48dp"
         android:shortcutShortLabel="@string/record_video"
         >
@@ -41,7 +41,7 @@
 
     <shortcut
         android:shortcutId="selfie"
-        android:enabled="true"
+        android:enabled="false"
         android:icon="@drawable/shortcut_ic_face_white_48dp"
         android:shortcutShortLabel="@string/selfie"
         >
