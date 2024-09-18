@@ -3,12 +3,8 @@ package com.github.aakumykov.kotlin_playground
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.android_dynamic_shortcuts_manager.DefaultShortcutsCreator
 import com.github.aakumykov.android_dynamic_shortcuts_manager.dynamic_shortcut_manager.DynamicShortcutManager
@@ -20,7 +16,6 @@ import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.u
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsXMLRawParser
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.extensions.getErrorMessage
-import com.github.aakumykov.kotlin_playground.extensions.showAppProperties
 import com.github.aakumykov.kotlin_playground.extensions.showToast
 import javax.xml.parsers.SAXParserFactory
 
@@ -33,7 +28,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val initialShortcuts: List<Shortcut> by lazy {
+    private val initialShortcutList: List<Shortcut> by lazy {
         try {
             shortcutsParser.parse(R.raw.shortcuts)
         } catch (e: Exception) {
@@ -42,30 +37,32 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         }
     }
 
+    private val shortcutList: MutableList<Shortcut> by lazy { initialShortcutList.toMutableList() }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapter = ShortcutArrayAdapter(this)
-        adapter.addAll(initialShortcuts)
+        val adapter = ShortcutArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice, shortcutList)
+        adapter.addAll(initialShortcutList)
 
         binding.listView.apply {
             this.adapter = adapter
             this.onItemClickListener = this@MainActivity
         }
 
-        binding.appInfoButton.setOnClickListener { showAppProperties() }
-        binding.clearLogButton.setOnClickListener { Logger.clear() }
-
-        binding.button1.setOnClickListener { action1() }
-        binding.button2.setOnClickListener { readShortcutsXML() }
-        binding.button3.setOnClickListener { createShortcuts() }
-        binding.button4.setOnClickListener { removeShortcuts() }
-        binding.createDefaultShortcutsButton.setOnClickListener { createDefaultShortcuts() }
+        binding.createDefaultShortcuts.setOnClickListener { createShortcuts() }
+        binding.removeAllShortcuts.setOnClickListener { removeAllShortcuts() }
+        binding.updateShortcutsButton.setOnClickListener { updateShortcutsAsSelected() }
 
         createDefaultShortcuts()
+    }
+
+    private fun updateShortcutsAsSelected() {
+
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -165,7 +162,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         }
     }
 
-    private fun removeShortcuts() {
+    private fun removeAllShortcuts() {
 
         if (null == shortcuts)
             readShortcutsXML()
@@ -179,14 +176,11 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     }
 
 
-    class ShortcutArrayAdapter(context: Context, @LayoutRes private val itemResource: Int) :
-        ArrayAdapter<Shortcut>(context, android.R.layout.simple_list_item_multiple_choice)
+    class ShortcutArrayAdapter(context: Context, itemLayoutRes: Int, initialShortcutList: MutableList<Shortcut>)
+        : ListViewAdapter<Shortcut>(context, itemLayoutRes, android.R.id.text1, initialShortcutList)
     {
-        private val inflater by lazy { LayoutInflater.from(context) }
-
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-
-            val view: View = inflater.inflate(itemResource, parent, false)
+        override fun getTitle(listItem: Shortcut?, itemPosition: Int): String {
+            return listItem?.shortcutShortLabel?.let { context.getString(it) } ?: "no-title*"
         }
     }
 

@@ -31,4 +31,8 @@
     <string name="calendar">Календарь</string>
     <string name="action_new_event">Новое мероприятие</string>
 
+    <string name="update_shortcuts">Обновить в соответствие с выбранным</string>
+    <string name="remove_all_shortcuts">Удалить все</string>
+    <string name="create_default_shortcuts">Создать ярлыки по умолчанию</string>
+
 </resources>
