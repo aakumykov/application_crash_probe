@@ -1,11 +1,14 @@
 package com.github.aakumykov.kotlin_playground
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.ListAdapter
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.android_dynamic_shortcuts_manager.DefaultShortcutsCreator
 import com.github.aakumykov.android_dynamic_shortcuts_manager.dynamic_shortcut_manager.DynamicShortcutManager
@@ -20,7 +23,6 @@ import com.github.aakumykov.kotlin_playground.extensions.getErrorMessage
 import com.github.aakumykov.kotlin_playground.extensions.showAppProperties
 import com.github.aakumykov.kotlin_playground.extensions.showToast
 import javax.xml.parsers.SAXParserFactory
-import kotlin.random.Random
 
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
@@ -46,9 +48,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice)
-
-        adapter.addAll(initialShortcuts.map { getString(it.shortcutShortLabel) })
+        val adapter = ShortcutArrayAdapter(this)
+        adapter.addAll(initialShortcuts)
 
         binding.listView.apply {
             this.adapter = adapter
@@ -178,9 +179,16 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     }
 
 
+    class ShortcutArrayAdapter(context: Context, @LayoutRes private val itemResource: Int) :
+        ArrayAdapter<Shortcut>(context, android.R.layout.simple_list_item_multiple_choice)
+    {
+        private val inflater by lazy { LayoutInflater.from(context) }
 
-    private fun log(text:String) = Logger.d(TAG, text)
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
+            val view: View = inflater.inflate(itemResource, parent, false)
+        }
+    }
 
     companion object {
         val TAG: String = MainActivity::class.java.simpleName
