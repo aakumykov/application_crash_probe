@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
         binding.createDefaultShortcuts.setOnClickListener { createDefaultShortcuts() }
         binding.removeAllShortcuts.setOnClickListener { removeAllShortcuts() }
+        binding.updateShortcutsButton.setOnClickListener { updateShortcutsAsSelected() }
     }
 
 
@@ -80,7 +81,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         try {
             dynamicShortcutManager.createDynamicShortcuts(checkedShortcutList)
             dynamicShortcutManager.removeDynamicShortcuts(uncheckedShortcutList)
-            showToast(R.string.shortcuts_are_updated)
+            showSuccessMessage(R.string.shortcuts_are_updated)
 
         } catch (e: Exception) {
             showErrorMessage(e)
@@ -114,7 +115,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
             }
         }
 
-        updateShortcutsAsSelected()
+        Log.d(TAG, "Устан. галочки: ${checkedShortcutList.map { it.shortcutId }.joinToString(", ")}")
+        Log.d(TAG, "Снятые галочки: ${uncheckedShortcutList.map { it.shortcutId }.joinToString(", ")}")
     }
 
 
@@ -124,7 +126,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     private fun showSuccessMessage(@StringRes stringRes: Int) {
         Log.d(TAG, string(stringRes))
-        showToast(stringRes)
+        showSnackbar(stringRes)
     }
 
     private fun showErrorMessage(t: Throwable) {
@@ -136,9 +138,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         showSnackbar(string(stringRes))
     }
 
-    private fun showSnackbar(text: String, longLength: Boolean = true) {
-        val length = if (longLength) Snackbar.LENGTH_LONG else Snackbar.LENGTH_SHORT
-        Snackbar.make(binding.root, text, length).apply {
+    private fun showSnackbar(text: String) {
+        Snackbar.make(binding.root, text, Snackbar.LENGTH_SHORT).apply {
             setAction(R.string.snackbar_close) {}
         }.show()
     }
