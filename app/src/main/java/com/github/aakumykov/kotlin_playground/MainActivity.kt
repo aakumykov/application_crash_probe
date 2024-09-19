@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AbsListView.CHOICE_MODE_MULTIPLE
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.android_dynamic_shortcuts_manager.DefaultShortcutsCreator
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         binding.listView.apply {
             this.adapter = adapter
             this.onItemClickListener = this@MainActivity
+            this.choiceMode = CHOICE_MODE_MULTIPLE
         }
 
         binding.createDefaultShortcuts.setOnClickListener { createShortcuts() }
