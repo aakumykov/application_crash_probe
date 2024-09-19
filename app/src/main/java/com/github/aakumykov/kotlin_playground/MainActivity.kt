@@ -6,7 +6,9 @@ import android.util.Log
 import android.view.View
 import android.widget.AbsListView.CHOICE_MODE_MULTIPLE
 import android.widget.AdapterView
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.util.forEach
 import com.github.aakumykov.android_dynamic_shortcuts_manager.DefaultShortcutsCreator
 import com.github.aakumykov.android_dynamic_shortcuts_manager.dynamic_shortcut_manager.DynamicShortcutManager
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.ShortcutsParser
@@ -18,6 +20,7 @@ import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.u
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.extensions.getErrorMessage
 import com.github.aakumykov.kotlin_playground.extensions.showToast
+import com.google.android.material.snackbar.Snackbar
 import javax.xml.parsers.SAXParserFactory
 
 
@@ -33,12 +36,15 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         try {
             shortcutsParser.parse(R.raw.shortcuts)
         } catch (e: Exception) {
-            Log.e(TAG, e.getErrorMessage(), e)
+            showErrorMessage(e)
             emptyList()
         }
     }
 
     private val shortcutList: MutableList<Shortcut> by lazy { initialShortcutList.toMutableList() }
+
+    private val checkedShortcutList: MutableList<Shortcut> = mutableListOf()
+    private val uncheckedShortcutList: MutableList<Shortcut> = mutableListOf()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +54,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         setContentView(binding.root)
 
         val adapter = ShortcutArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice, shortcutList)
-        adapter.addAll(initialShortcutList)
 
         binding.listView.apply {
             this.adapter = adapter
@@ -56,30 +61,46 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
             this.choiceMode = CHOICE_MODE_MULTIPLE
         }
 
-        binding.createDefaultShortcuts.setOnClickListener { createShortcuts() }
+        binding.createDefaultShortcuts.setOnClickListener { createDefaultShortcuts() }
         binding.removeAllShortcuts.setOnClickListener { removeAllShortcuts() }
         binding.updateShortcutsButton.setOnClickListener { updateShortcutsAsSelected() }
-
-        createDefaultShortcuts()
-    }
-
-    private fun updateShortcutsAsSelected() {
-
-    }
-
-    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
     }
 
 
     private fun createDefaultShortcuts() {
         try {
             DefaultShortcutsCreator.getDefault(this).initShortcuts(R.raw.shortcuts)
-            Logger.d(TAG, "Ярлыки инициализированы")
+            showSuccessMessage(R.string.default_shortcuts_are_crated)
         }
         catch (e: Exception) {
-            Logger.e(TAG, e.getErrorMessage(), e)
+            showErrorMessage(e)
         }
+    }
+
+
+    private fun updateShortcutsAsSelected() {
+
+    }
+
+
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+        checkedShortcutList.clear()
+
+        uncheckedShortcutList.clear()
+        uncheckedShortcutList.addAll(shortcutList)
+
+        binding.listView.checkedItemPositions.forEach { key, value ->
+            if (value) {
+                shortcutList[key].also {
+                    checkedShortcutList.add(it)
+                    uncheckedShortcutList.remove(it)
+                }
+            }
+        }
+
+        Log.d(TAG, "Устан. галочки: ${checkedShortcutList.map { it.shortcutId }.joinToString(", ")}")
+        Log.d(TAG, "Снятые галочки: ${uncheckedShortcutList.map { it.shortcutId }.joinToString(", ")}")
     }
 
 
@@ -185,6 +206,30 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
             return listItem?.shortcutShortLabel?.let { context.getString(it) } ?: "no-title*"
         }
     }
+
+    private fun string(@StringRes stringRes: Int): String = this.getString(stringRes)
+
+
+    private fun showSuccessMessage(@StringRes stringRes: Int) {
+        Log.d(TAG, string(stringRes))
+        showSnackbar(stringRes)
+    }
+
+    private fun showErrorMessage(t: Throwable) {
+        Log.e(TAG, t.getErrorMessage(), t)
+        showSnackbar(t.getErrorMessage())
+    }
+
+    private fun showSnackbar(@StringRes stringRes: Int) {
+        showSnackbar(string(stringRes))
+    }
+
+    private fun showSnackbar(text: String) {
+        Snackbar.make(binding.root, text, Snackbar.LENGTH_SHORT).apply {
+            setAction(R.string.snackbar_close) {}
+        }.show()
+    }
+
 
     companion object {
         val TAG: String = MainActivity::class.java.simpleName

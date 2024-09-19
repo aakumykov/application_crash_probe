@@ -35,5 +35,8 @@
     <string name="update_shortcuts">Обновить в соответствие с выбранным</string>
     <string name="remove_all_shortcuts">Удалить все</string>
     <string name="create_default_shortcuts">Создать ярлыки по умолчанию</string>
+    <string name="error_reading_shortcuts_xml">Ошибка чтения shortcuts.xml</string>
+    <string name="default_shortcuts_are_crated">Ярлыки по умолчанию созданы</string>
+    <string name="snackbar_close">✖</string>
 
 </resources>
