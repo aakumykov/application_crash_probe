@@ -1,6 +1,10 @@
 package com.github.aakumykov.kotlin_playground
 
+import androidx.annotation.IdRes
 import androidx.annotation.StringRes
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import androidx.test.platform.app.InstrumentationRegistry
@@ -9,6 +13,7 @@ import androidx.test.uiautomator.Direction
 import androidx.test.uiautomator.UiDevice
 import junit.framework.TestCase.assertEquals
 import org.junit.After
+import org.junit.Assert.assertNotEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -19,49 +24,81 @@ class ExampleAppShortcutsTest {
     private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
     private val context = InstrumentationRegistry.getInstrumentation().targetContext
 
+    private val defaultShortcutList = listOf(
+       R.string.shortcut_label_settings,
+       R.string.shortcut_label_gallery,
+       R.string.shortcut_label_record_video,
+       R.string.shortcut_label_selfie,
+    )
+
+
+    /*@Test
+    fun calendar_shouldDisplayNewEventShortcut() {
+        openAllApps()
+        openAppShortcuts(R.string.calendar)
+        verifyAppShortcuts(listOf(string(R.string.action_new_event)))
+    }*/
+
 
     @Test
-    fun openSelfApp() {
+    fun onAppInstallDefaultShortcutsMustBeCreated() {
+        // Dynamic shortcuts fist created in onCreate() method, that is why
+        // I have to open app after installation.
         openAllApps()
-        openAppByName(getString(R.string.app_name))
+        openSelfApp()
+
+        openAllApps()
+        openSelfShortcuts()
+        verifyAppShortcuts(listOf(
+            R.string.shortcut_label_settings
+        ))
     }
 
 
     @Test
-    fun shouldDisplayDefaultShortcutsForSelfApp() {
+    fun shouldDisplayDefaultShortcutsAfterCreatingThem() {
+        openAllApps()
+        openSelfApp()
+        clickButton(R.id.createDefaultShortcuts)
+
 
         openAllApps()
+        openSelfShortcuts()
+        verifyAppShortcuts(defaultShortcutList)
+    }
 
-        openAppShortcuts(getString(R.string.app_name))
 
-        verifyAppShortcuts(listOf(
-            getString(R.string.action_settings),
-            getString(R.string.gallery),
-            getString(R.string.record_video),
-            getString(R.string.selfie),
-        ))
+    @Test
+    fun shouldNoDisplayAppShortcutsAfterDeleteAll() {
+        openAllApps()
+        openSelfApp()
+        clickButton(R.id.removeAllShortcuts)
+
+        openAllApps()
+        openSelfShortcuts()
+        verifyNoAppShortcuts(defaultShortcutList)
     }
 
 
     @Test
     fun shouldDisplay() {
         openAllApps()
-        openAppShortcuts(getString(R.string.calendar))
-        verifyAppShortcuts(listOf(getString(R.string.action_new_event)))
+        openAppShortcuts(R.string.calendar)
+        verifyAppShortcuts(listOf(R.string.action_new_event))
     }
 
 
     @Test
     fun openSystemSettingsFromHomeScreen() {
-        pressHome();
-        openAppByName(getString(R.string.settings))
+        pressHome()
+        openAppByName(string(R.string.app_name_settings))
     }
 
 
     @Test
     fun openSystemSettingsFromAllApps() {
         openAllApps()
-        openAppByName(getString(R.string.settings))
+        openAppByName(string(R.string.app_name_settings))
     }
 
 
@@ -71,7 +108,7 @@ class ExampleAppShortcutsTest {
     }
 
 
-    private fun getString(@StringRes strRes: Int): String {
+    private fun string(@StringRes strRes: Int): String {
         return context.getString(strRes)
     }
 
@@ -94,19 +131,46 @@ class ExampleAppShortcutsTest {
     }
 
 
+    private fun openSelfApp() {
+        openAppByName(string(R.string.app_name))
+    }
+
+
+    private fun openSelfShortcuts() {
+        openAppShortcuts(R.string.app_name)
+    }
+
+
+    private fun clickButton(@IdRes buttonId: Int) {
+        onView(withId(buttonId)).perform(click())
+    }
+
+
     private fun openAppByName(appName: String) {
         device.findObject(By.desc(appName)).click()
     }
 
 
-    private fun openAppShortcuts(name: String) {
-        device.findObject(By.desc(name)).longClick()
+    private fun openAppShortcuts(@StringRes nameRes: Int) {
+        device.findObject(By.desc(string(nameRes))).longClick()
     }
 
 
-    private fun verifyAppShortcuts(shortcuts: List<String>) {
-        shortcuts.forEach { appShortcut ->
-            assertEquals(appShortcut, device.findObject(By.text(appShortcut)).text)
+    private fun verifyAppShortcuts(shortcuts: List<Int>) {
+        shortcuts.forEach { shortcutShortLabelId: Int ->
+            assertEquals(
+                shortcutShortLabelId,
+                device.findObject(By.text(string(shortcutShortLabelId))).text
+            )
+        }
+    }
+
+    private fun verifyNoAppShortcuts(shortcuts: List<Int>) {
+        shortcuts.forEach { shortcutShortLabelId: Int ->
+            assertNotEquals(
+                shortcutShortLabelId,
+                device.findObject(By.text(string(shortcutShortLabelId))).text
+            )
         }
     }
 }
