@@ -63,14 +63,12 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         binding.createDefaultShortcuts.setOnClickListener { createDefaultShortcuts() }
         binding.removeAllShortcuts.setOnClickListener { removeAllShortcuts() }
         binding.updateShortcutsButton.setOnClickListener { updateShortcutsAsSelected() }
-
-        createDefaultShortcuts()
     }
 
 
     private fun createDefaultShortcuts() {
         try {
-            DefaultShortcutsCreator.getDefault(this).initShortcuts(R.raw.shortcuts)
+            App.createDefaultShortcuts(this)
             showSuccessMessage(R.string.default_shortcuts_are_crated)
         }
         catch (e: Exception) {
