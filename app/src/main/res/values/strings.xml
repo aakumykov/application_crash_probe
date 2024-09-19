@@ -2,12 +2,16 @@
     <string name="app_name">Песочница Kotlin</string>
     <string name="app_description">Динамические ярлыки</string>
 
-    <string name="action_settings">Настройки</string>
-    <string name="gallery">Галерея</string>
-    <string name="record_video">Запись видео</string>
-    <string name="selfie">Селфи</string>
-    <string name="camera">Камера</string>
-    <string name="settings">Настройки</string>
+
+    <string name="shortcut_label_settings">Настройки</string>
+    <string name="shortcut_label_gallery">Галерея</string>
+    <string name="shortcut_label_record_video">Запись видео</string>
+    <string name="shortcut_label_selfie">Селфи</string>
+    <string name="shortcut_label_camera">Камера</string>
+
+
+    <string name="app_name_settings">Настройки</string>
+
 
     <string name="preference_screen_shortcuts">Настройки ярлыков</string>
 
