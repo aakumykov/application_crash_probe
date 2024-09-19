@@ -40,5 +40,6 @@
     <string name="snackbar_close">✖</string>
     <string name="shortcuts_are_updated">Ярлыки обновлены</string>
     <string name="all_shortcuts_are_removed">Все ярлыки удалены</string>
+    <string name="manual_shortcuts_management">Ручная настройка ярлыков:</string>
 
 </resources>

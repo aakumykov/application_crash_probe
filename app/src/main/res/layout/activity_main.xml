@@ -48,7 +48,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/update_shortcuts"
-            android:backgroundTint="#F57C00"/>
+            android:backgroundTint="#03A9F4"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textAlignment="center"
+            android:text="@string/manual_shortcuts_management" />
 
         <ListView
             android:id="@+id/listView"
