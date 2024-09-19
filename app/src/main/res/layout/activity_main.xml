@@ -43,19 +43,19 @@
             android:text="@string/remove_all_shortcuts"
             android:backgroundTint="#D32F2F"/>
 
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            />
-
         <Button
             android:id="@+id/updateShortcutsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/update_shortcuts"
             android:backgroundTint="#F57C00"/>
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
 
     </LinearLayout>
 
