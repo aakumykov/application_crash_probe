@@ -38,5 +38,7 @@
     <string name="error_reading_shortcuts_xml">Ошибка чтения shortcuts.xml</string>
     <string name="default_shortcuts_are_crated">Ярлыки по умолчанию созданы</string>
     <string name="snackbar_close">✖</string>
+    <string name="shortcuts_are_updated">Ярлыки обновлены</string>
+    <string name="all_shortcuts_are_removed">Все ярлыки удалены</string>
 
 </resources>
