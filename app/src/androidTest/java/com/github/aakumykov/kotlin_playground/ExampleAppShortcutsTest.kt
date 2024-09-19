@@ -2,6 +2,7 @@ package com.github.aakumykov.kotlin_playground
 
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
+import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -12,6 +13,7 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Direction
 import androidx.test.uiautomator.UiDevice
 import junit.framework.TestCase.assertEquals
+import org.hamcrest.CoreMatchers.anything
 import org.junit.After
 import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNull
@@ -76,6 +78,24 @@ class ExampleAppShortcutsTest {
     }
 
 
+// Check Adapterview is displayed or not and perform click on second item. onData(allOf(withProductID(1)))
+//        onData(anything())
+//            .inAdapterView(allOf(isAssignableFrom(AdapterView.class), isDisplayed()))
+//            .perform(click());
+
+
+    @Test
+    fun shoud_click_on_list_item() {
+        openSelfAppFromAllApps()
+
+        onData(anything())
+            .inAdapterView(withId(R.id.listView))
+            .atPosition(0).perform(click())
+
+        clickButton(R.id.updateShortcutsButton)
+
+    }
+
 
     /*@Test
     fun openSystemSettingsFromHomeScreen() {
@@ -125,6 +145,11 @@ class ExampleAppShortcutsTest {
         openAppByName(string(R.string.app_name))
     }
 
+
+    private fun openSelfAppFromAllApps() {
+        openAllApps()
+        openSelfApp()
+    }
 
     private fun openSelfShortcuts() {
         openAppShortcuts(R.string.app_name)
