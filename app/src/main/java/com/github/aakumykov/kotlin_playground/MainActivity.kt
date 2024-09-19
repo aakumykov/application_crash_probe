@@ -63,6 +63,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         binding.createDefaultShortcuts.setOnClickListener { createDefaultShortcuts() }
         binding.removeAllShortcuts.setOnClickListener { removeAllShortcuts() }
         binding.updateShortcutsButton.setOnClickListener { updateShortcutsAsSelected() }
+
+        createDefaultShortcuts()
     }
 
 
