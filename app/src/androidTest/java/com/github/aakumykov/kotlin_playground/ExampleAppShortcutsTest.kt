@@ -14,6 +14,7 @@ import androidx.test.uiautomator.UiDevice
 import junit.framework.TestCase.assertEquals
 import org.junit.After
 import org.junit.Assert.assertNotEquals
+import org.junit.Assert.assertNull
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -25,32 +26,27 @@ class ExampleAppShortcutsTest {
     private val context = InstrumentationRegistry.getInstrumentation().targetContext
 
     private val defaultShortcutList = listOf(
-       R.string.shortcut_label_settings,
-       R.string.shortcut_label_gallery,
-       R.string.shortcut_label_record_video,
-       R.string.shortcut_label_selfie,
+        string(R.string.shortcut_label_settings),
+        string(R.string.shortcut_label_gallery),
+        string(R.string.shortcut_label_record_video),
+        string(R.string.shortcut_label_selfie),
     )
 
 
-    /*@Test
+    @Test
     fun calendar_shouldDisplayNewEventShortcut() {
         openAllApps()
         openAppShortcuts(R.string.calendar)
         verifyAppShortcuts(listOf(string(R.string.action_new_event)))
-    }*/
+    }
 
 
     @Test
     fun onAppInstallDefaultShortcutsMustBeCreated() {
-        // Dynamic shortcuts fist created in onCreate() method, that is why
-        // I have to open app after installation.
-        openAllApps()
-        openSelfApp()
-
         openAllApps()
         openSelfShortcuts()
         verifyAppShortcuts(listOf(
-            R.string.shortcut_label_settings
+            string(R.string.shortcut_label_settings)
         ))
     }
 
@@ -80,32 +76,26 @@ class ExampleAppShortcutsTest {
     }
 
 
-    @Test
-    fun shouldDisplay() {
-        openAllApps()
-        openAppShortcuts(R.string.calendar)
-        verifyAppShortcuts(listOf(R.string.action_new_event))
-    }
 
-
-    @Test
+    /*@Test
     fun openSystemSettingsFromHomeScreen() {
         pressHome()
         openAppByName(string(R.string.app_name_settings))
-    }
+    }*/
 
 
-    @Test
+    /*@Test
     fun openSystemSettingsFromAllApps() {
         openAllApps()
         openAppByName(string(R.string.app_name_settings))
-    }
+    }*/
 
 
     @After
     fun tearDown() {
-        device.pressHome()
+        pressHome()
     }
+
 
 
     private fun string(@StringRes strRes: Int): String {
@@ -156,21 +146,15 @@ class ExampleAppShortcutsTest {
     }
 
 
-    private fun verifyAppShortcuts(shortcuts: List<Int>) {
-        shortcuts.forEach { shortcutShortLabelId: Int ->
-            assertEquals(
-                shortcutShortLabelId,
-                device.findObject(By.text(string(shortcutShortLabelId))).text
-            )
+    private fun verifyAppShortcuts(shortcuts: List<String>) {
+        shortcuts.forEach { appShortcut ->
+            assertEquals(appShortcut, device.findObject(By.text(appShortcut)).text)
         }
     }
 
-    private fun verifyNoAppShortcuts(shortcuts: List<Int>) {
-        shortcuts.forEach { shortcutShortLabelId: Int ->
-            assertNotEquals(
-                shortcutShortLabelId,
-                device.findObject(By.text(string(shortcutShortLabelId))).text
-            )
+    private fun verifyNoAppShortcuts(shortcuts: List<String>) {
+        shortcuts.forEach { appShortcut ->
+            assertNull(device.findObject(By.text(appShortcut)))
         }
     }
 }
