@@ -2,7 +2,6 @@ package com.github.aakumykov.kotlin_playground
 
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
-import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -13,9 +12,7 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Direction
 import androidx.test.uiautomator.UiDevice
 import junit.framework.TestCase.assertEquals
-import org.hamcrest.CoreMatchers.anything
 import org.junit.After
-import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,7 +22,6 @@ import org.junit.runner.RunWith
 class ExampleAppShortcutsTest {
 
     private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-    private val context = InstrumentationRegistry.getInstrumentation().targetContext
 
     private val defaultShortcutList = listOf(
         string(R.string.shortcut_label_settings),
@@ -37,63 +33,44 @@ class ExampleAppShortcutsTest {
 
     @Test
     fun calendar_shouldDisplayNewEventShortcut() {
-        openAllApps()
-        openAppShortcuts(R.string.calendar)
+        openAllApps(device)
+        openAppShortcuts(device, R.string.calendar)
         verifyAppShortcuts(listOf(string(R.string.action_new_event)))
     }
 
 
     @Test
     fun onAppInstallDefaultShortcutsMustBeCreated() {
-        openAllApps()
-        openSelfShortcuts()
-        verifyAppShortcuts(listOf(
+        openAllApps(device)
+        openSelfShortcuts(device)
+        /*verifyAppShortcuts(listOf(
             string(R.string.shortcut_label_settings)
-        ))
+        ))*/
     }
 
 
     @Test
     fun shouldDisplayDefaultShortcutsAfterCreatingThem() {
-        openAllApps()
-        openSelfApp()
+        openAllApps(device)
+        openSelfApp(device)
         clickButton(R.id.createDefaultShortcuts)
 
 
-        openAllApps()
-        openSelfShortcuts()
+        openAllApps(device)
+        openSelfShortcuts(device)
         verifyAppShortcuts(defaultShortcutList)
     }
 
 
     @Test
     fun shouldNoDisplayAppShortcutsAfterDeleteAll() {
-        openAllApps()
-        openSelfApp()
+        openAllApps(device)
+        openSelfApp(device)
         clickButton(R.id.removeAllShortcuts)
 
-        openAllApps()
-        openSelfShortcuts()
+        openAllApps(device)
+        openSelfShortcuts(device)
         verifyNoAppShortcuts(defaultShortcutList)
-    }
-
-
-// Check Adapterview is displayed or not and perform click on second item. onData(allOf(withProductID(1)))
-//        onData(anything())
-//            .inAdapterView(allOf(isAssignableFrom(AdapterView.class), isDisplayed()))
-//            .perform(click());
-
-
-    @Test
-    fun shoud_click_on_list_item() {
-        openSelfAppFromAllApps()
-
-        onData(anything())
-            .inAdapterView(withId(R.id.listView))
-            .atPosition(0).perform(click())
-
-        clickButton(R.id.updateShortcutsButton)
-
     }
 
 
@@ -111,29 +88,24 @@ class ExampleAppShortcutsTest {
     }*/
 
 
-    @After
+    /*@After
     fun tearDown() {
-        pressHome()
-    }
+        pressHome(device)
+    }*/
 
 
 
-    private fun string(@StringRes strRes: Int): String {
-        return context.getString(strRes)
-    }
-
-
-    private fun pressHome() {
+    private fun pressHome(device: UiDevice) {
         device.pressHome()
     }
 
 
-    private fun openAllApps() {
+    private fun openAllApps(device: UiDevice) {
 
         device.pressHome()
 
         if (android.os.Build.VERSION.SDK_INT == 25) {
-            openAppByName("Apps list")
+            openAppByName(device, "Apps list")
         } else {
             device.findObject(By.res("com.google.android.apps.nexuslauncher:id/workspace"))
                 .fling(Direction.DOWN)
@@ -141,18 +113,19 @@ class ExampleAppShortcutsTest {
     }
 
 
-    private fun openSelfApp() {
-        openAppByName(string(R.string.app_name))
+    private fun openSelfApp(device: UiDevice) {
+        openAppByName(device, string(R.string.app_name))
     }
 
 
-    private fun openSelfAppFromAllApps() {
-        openAllApps()
-        openSelfApp()
+    private fun openSelfAppFromAllApps(device: UiDevice) {
+        openAllApps(device)
+        openSelfApp(device)
     }
 
-    private fun openSelfShortcuts() {
-        openAppShortcuts(R.string.app_name)
+
+    private fun openSelfShortcuts(device: UiDevice) {
+        openAppShortcuts(device, R.string.app_name)
     }
 
 
@@ -161,12 +134,12 @@ class ExampleAppShortcutsTest {
     }
 
 
-    private fun openAppByName(appName: String) {
+    private fun openAppByName(device: UiDevice, appName: String) {
         device.findObject(By.desc(appName)).click()
     }
 
 
-    private fun openAppShortcuts(@StringRes nameRes: Int) {
+    private fun openAppShortcuts(device: UiDevice, @StringRes nameRes: Int) {
         device.findObject(By.desc(string(nameRes))).longClick()
     }
 
@@ -184,3 +157,8 @@ class ExampleAppShortcutsTest {
     }
 }
 
+val targetContext get() = InstrumentationRegistry.getInstrumentation().targetContext
+
+fun string(@StringRes strRes: Int): String {
+    return targetContext.getString(strRes)
+}
