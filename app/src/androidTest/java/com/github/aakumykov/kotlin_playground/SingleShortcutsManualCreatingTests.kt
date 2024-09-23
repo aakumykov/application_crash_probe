@@ -12,7 +12,7 @@ import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 
-class ShortcutsListTests : BasicShortcutsTest() {
+class SingleShortcutsManualCreatingTests : BasicShortcutsTest() {
 
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
