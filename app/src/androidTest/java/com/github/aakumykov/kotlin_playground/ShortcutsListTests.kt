@@ -29,22 +29,17 @@ class ShortcutsListTests {
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
+
     @After
     fun tearDown() {
         showDesktop(device)
     }
 
-    @Test
-    fun onAppInstallDefaultShortcutsMustBeCreated() {
-        openAllApps(device)
-        openSelfShortcuts(device)
-        /*verifyAppShortcuts(listOf(
-            string(R.string.shortcut_label_settings)
-        ))*/
-    }
+
 
     @Test
-    fun when_check_settings_then_creates_only_dettings_shortcut() {
+    fun when_check_settings_and_press_update_shortcuts_then_creates_only_settings_shortcut() {
+
         clickListItemWithShortcutShortLabel(R.string.shortcut_label_settings)
         clickButton(R.id.updateShortcutsButton)
 
@@ -54,6 +49,7 @@ class ShortcutsListTests {
             string(R.string.shortcut_label_settings)
         ))
     }
+
 
     private fun clickButton(buttonId: Int) {
         onView(withId(buttonId)).perform(click())
@@ -92,6 +88,7 @@ class ShortcutsListTests {
         openSelfApp(device)
     }
 
+
     private fun openAllApps(device: UiDevice) {
         showDesktop(device)
         if (android.os.Build.VERSION.SDK_INT == 25) {
@@ -107,20 +104,23 @@ class ShortcutsListTests {
         openAppByName(device, string(R.string.app_name))
     }
 
+
     private fun openAppByName(device: UiDevice, appName: String) {
         device.findObject(By.desc(appName)).click()
     }
+
 
     private fun openSelfShortcuts(device: UiDevice) {
         openAppShortcuts(device, R.string.app_name)
     }
 
+
     private fun openAppShortcuts(device: UiDevice, @StringRes nameRes: Int) {
         device.findObject(By.desc(string(nameRes))).longClick()
     }
 
+
     private fun showDesktop(device: UiDevice) {
         device.pressHome()
     }
-
 }
