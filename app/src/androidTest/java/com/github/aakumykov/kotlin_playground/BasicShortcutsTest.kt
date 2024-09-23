@@ -51,6 +51,11 @@ open class BasicShortcutsTest {
         openSelfApp(device)
     }
 
+    fun openSelfShortcutsFromAllApps(device: UiDevice) {
+        openAllApps(device)
+        openSelfShortcuts(device)
+    }
+
 
     fun openSelfShortcuts(device: UiDevice) {
         openAppShortcuts(device, R.string.app_name)

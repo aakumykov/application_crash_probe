@@ -19,8 +19,7 @@ class MassiveAppShortcutsTest : BasicShortcutsTest() {
 
     @Test
     fun default_shortcuts_must_be_created_on_app_install() {
-        openAllApps(device)
-        openSelfShortcuts(device)
+        openSelfShortcutsFromAllApps(device)
         verifyAppShortcuts(listOf(
             string(R.string.shortcut_label_settings)
         ))
@@ -29,8 +28,7 @@ class MassiveAppShortcutsTest : BasicShortcutsTest() {
 
     @Test
     fun should_display_default_shortcuts_after_creating_them() {
-        openAllApps(device)
-        openSelfApp(device)
+        openSelfAppFromAllApps(device)
         clickButton(R.id.createDefaultShortcuts)
 
         openAllApps(device)
@@ -41,12 +39,21 @@ class MassiveAppShortcutsTest : BasicShortcutsTest() {
 
     @Test
     fun should_no_display_app_shortcuts_after_removing_all() {
-        openAllApps(device)
-        openSelfApp(device)
+        openSelfAppFromAllApps(device)
         clickButton(R.id.removeAllShortcuts)
 
         openAllApps(device)
         openSelfShortcuts(device)
         verifyNoAppShortcuts(defaultShortcutList)
+    }
+
+
+    @Test
+    fun should_not_display_shortcuts_after_creating_with_no_items_checked() {
+//        openSelfAppFromAllApps(device)
+//
+//        openAllApps(device)
+//        openSelfShortcuts(device)
+//        verifyNoAppShortcuts(defaultShortcutList)
     }
 }
