@@ -1,12 +1,10 @@
-package com.github.aakumykov.android_dynamic_shortcuts_manager
+package com.github.aakumykov.kotlin_playground
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.github.aakumykov.android_dynamic_shortcuts_manager.common.packageName
-import com.github.aakumykov.android_dynamic_shortcuts_manager.common.resources
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ResourceResolver
-import org.junit.After
+import com.github.aakumykov.kotlin_playground.utils.packageName
+import com.github.aakumykov.kotlin_playground.utils.resources
 import org.junit.Assert.assertEquals
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -18,13 +16,15 @@ class ResourceResolverInstrumentedTest {
 
     @Test
     fun resolve_string_resource_without_error() {
-        assertEquals(R.string.test_string,
-            resourceResolver.getStringResourceByName("test_string"))
+        assertEquals(
+            com.github.aakumykov.kotlin_playground.R.string.app_name,
+            resourceResolver.getStringResourceByName("Динамические ярлыки"))
     }
 
     @Test
     fun resolve_drawable_resource_name_to_int() {
-        assertEquals(R.drawable.ic_android_black_24dp,
-            resourceResolver.getDrawableResourceByName("ic_android_black_24dp"))
+        assertEquals(
+            com.github.aakumykov.kotlin_playground.R.drawable.settings,
+            resourceResolver.getDrawableResourceByName("settings"))
     }
 }
