@@ -16,6 +16,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "kotlin_playground"
+rootProject.name = "android_dynamic_shortcut_manager"
 include ':app'
 include ':lib'
