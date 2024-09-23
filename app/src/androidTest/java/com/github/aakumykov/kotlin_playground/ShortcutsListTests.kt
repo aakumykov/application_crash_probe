@@ -1,5 +1,6 @@
 package com.github.aakumykov.kotlin_playground
 
+import androidx.annotation.StringRes
 import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.BoundedMatcher
@@ -16,27 +17,53 @@ class ShortcutsListTests : BasicShortcutsTest() {
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
-
     @After
-    fun tearDown() {
-        showDesktop(device)
+    fun tearDown() { showDesktop(device) }
+
+
+    // Настройки
+    @Test
+    fun when_check_settings_and_press_update_shortcuts_then_creates_only_that_shortcut() {
+        checkSingleSelectedShortcutManuallyCreated(R.string.shortcut_label_settings)
+    }
+
+    // Камера
+    @Test
+    fun when_check_camera_and_press_update_shortcuts_then_creates_only_that_shortcut() {
+        checkSingleSelectedShortcutManuallyCreated(R.string.shortcut_label_camera)
+    }
+
+    // Видео
+    @Test
+    fun when_check_video_and_press_update_shortcuts_then_creates_only_that_shortcut() {
+        checkSingleSelectedShortcutManuallyCreated(R.string.shortcut_label_settings)
+    }
+
+    // Селфи
+    @Test
+    fun when_check_selfie_and_press_update_shortcuts_then_creates_only_that_shortcut() {
+        checkSingleSelectedShortcutManuallyCreated(R.string.shortcut_label_camera)
+    }
+
+    // Галарея
+    @Test
+    fun when_check_gallery_and_press_update_shortcuts_then_creates_only_that_shortcut() {
+        checkSingleSelectedShortcutManuallyCreated(R.string.shortcut_label_camera)
     }
 
 
 
-    @Test
-    fun when_check_settings_and_press_update_shortcuts_then_creates_only_settings_shortcut() {
+    private fun checkSingleSelectedShortcutManuallyCreated(@StringRes shortcutShortLabelId: Int) {
 
-        clickListItemWithShortcutShortLabel(R.string.shortcut_label_settings)
+        clickListItemWithShortcutShortLabel(shortcutShortLabelId)
         clickButton(R.id.updateShortcutsButton)
 
         openAllApps(device)
         openSelfShortcuts(device)
         verifyAppShortcuts(listOf(
-            string(R.string.shortcut_label_settings)
+            string(shortcutShortLabelId)
         ))
     }
-
 
 
 
