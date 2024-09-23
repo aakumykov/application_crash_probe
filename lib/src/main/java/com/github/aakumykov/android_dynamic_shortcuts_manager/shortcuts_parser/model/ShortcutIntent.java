@@ -1,7 +1,11 @@
 package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model;
 
+import static com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.other.ComparisonUtils.bothNullOrEquals;
+
 import android.content.ComponentName;
 import android.content.Intent;
+
+import androidx.annotation.Nullable;
 
 public class ShortcutIntent {
 
@@ -27,5 +31,24 @@ public class ShortcutIntent {
                 this.targetClass
         ));
         return intent;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+
+        if (null == obj)
+            return false;
+
+        if (this == obj)
+            return true;
+
+        if (!(obj instanceof ShortcutIntent))
+            return false;
+
+        final ShortcutIntent si = (ShortcutIntent) obj;
+
+        return this.action.equals(si.action) &&
+                this.targetPackage.equals(si.targetPackage) &&
+                this.targetClass.equals(si.targetClass);
     }
 }

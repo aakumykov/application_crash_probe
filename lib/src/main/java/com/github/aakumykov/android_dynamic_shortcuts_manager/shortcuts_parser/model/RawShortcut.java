@@ -1,5 +1,7 @@
 package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model;
 
+import static com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.other.ComparisonUtils.bothNullOrEquals;
+
 import androidx.annotation.Nullable;
 
 public class RawShortcut {
@@ -42,5 +44,28 @@ public class RawShortcut {
 
     public void setShortcutDisabledMessage(@Nullable String shortcutDisabledMessage) {
         this.shortcutDisabledMessage = shortcutDisabledMessage;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+
+        if (null == obj)
+            return false;
+
+        if (this == obj)
+            return true;
+
+        if (!(obj instanceof RawShortcut))
+            return false;
+
+        final RawShortcut rs = (RawShortcut) obj;
+
+        return this.shortcutId.equals(rs.shortcutId) &&
+                this.enabled == rs.enabled &&
+                this.icon.equals(rs.icon) &&
+                this.shortcutShortLabel.equals(rs.shortcutShortLabel) &&
+                bothNullOrEquals(this.shortcutIntent,rs.shortcutIntent) &&
+                bothNullOrEquals(this.shortcutDisabledMessage, rs.shortcutDisabledMessage) &&
+                bothNullOrEquals(this.shortcutLongLabel, rs.shortcutLongLabel);
     }
 }
