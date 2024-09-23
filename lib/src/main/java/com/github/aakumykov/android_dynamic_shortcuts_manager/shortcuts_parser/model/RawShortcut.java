@@ -24,6 +24,14 @@ public class RawShortcut {
         this.shortcutShortLabel = shortcutShortLabel;
     }
 
+    public RawShortcut(String shortcutId, Boolean enabled, String icon, String shortcutShortLabel, ShortcutIntent shortcutIntent) {
+        this.shortcutId = shortcutId;
+        this.enabled = enabled;
+        this.icon = icon;
+        this.shortcutShortLabel = shortcutShortLabel;
+        this.shortcutIntent = shortcutIntent;
+    }
+
     public void setShortcutIntent(@Nullable ShortcutIntent shortcutIntent) {
         this.shortcutIntent = shortcutIntent;
     }
