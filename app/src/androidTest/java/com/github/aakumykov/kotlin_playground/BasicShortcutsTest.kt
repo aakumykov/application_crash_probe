@@ -17,7 +17,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @SdkSuppress(minSdkVersion = 25)
-open class BasicShortcutsTest {
+abstract class BasicShortcutsTest {
 
 
     val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())

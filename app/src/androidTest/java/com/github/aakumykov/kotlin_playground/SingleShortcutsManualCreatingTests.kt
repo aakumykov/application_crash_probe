@@ -12,7 +12,7 @@ import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 
-class SingleShortcutsManualCreatingTests : BasicShortcutsTest() {
+class SingleShortcutsManualCreatingTests : ListClickingTest() {
 
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
@@ -56,33 +56,12 @@ class SingleShortcutsManualCreatingTests : BasicShortcutsTest() {
     private fun checkSingleSelectedShortcutManuallyCreated(@StringRes shortcutShortLabelId: Int) {
 
         clickListItemWithShortcutShortLabel(shortcutShortLabelId)
-        clickButton(R.id.updateShortcutsButton)
+        clickUpdateShortcutsButton()
 
         openAllApps(device)
         openSelfShortcuts(device)
         verifyAppShortcuts(listOf(
             string(shortcutShortLabelId)
         ))
-    }
-
-
-
-    private fun clickListItemWithShortcutShortLabel(shortLabelStringRes: Int) {
-        onData(withShortcutShortLabel(shortLabelStringRes))
-            .perform(click())
-    }
-
-
-    private fun withShortcutShortLabel(value: Int): Matcher<Any?> {
-        return object: BoundedMatcher<Any?,Shortcut>(Shortcut::class.java) {
-
-            override fun describeTo(description: Description?) {
-                description?.appendText("has value $value")
-            }
-
-            override fun matchesSafely(item: Shortcut?): Boolean {
-                return item?.shortcutShortLabel == value
-            }
-        }
     }
 }
