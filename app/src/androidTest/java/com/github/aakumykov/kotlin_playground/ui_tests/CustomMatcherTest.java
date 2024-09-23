@@ -1,4 +1,4 @@
-package com.github.aakumykov.kotlin_playground;
+package com.github.aakumykov.kotlin_playground.ui_tests;
 
 import androidx.test.espresso.matcher.BoundedMatcher;
 import androidx.test.ext.junit.runners.AndroidJUnit4;

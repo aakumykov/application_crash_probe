@@ -1,4 +1,4 @@
-package com.github.aakumykov.kotlin_playground
+package com.github.aakumykov.kotlin_playground.ui_tests
 
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
@@ -11,6 +11,8 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Direction
 import androidx.test.uiautomator.UiDevice
+import com.github.aakumykov.kotlin_playground.R
+import com.github.aakumykov.kotlin_playground.utils.string
 import junit.framework.TestCase.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.runner.RunWith

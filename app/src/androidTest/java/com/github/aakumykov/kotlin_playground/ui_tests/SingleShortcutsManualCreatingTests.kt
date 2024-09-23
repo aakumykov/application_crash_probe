@@ -1,13 +1,10 @@
-package com.github.aakumykov.kotlin_playground
+package com.github.aakumykov.kotlin_playground.ui_tests
 
 import androidx.annotation.StringRes
-import androidx.test.espresso.Espresso.onData
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.matcher.BoundedMatcher
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut
-import org.hamcrest.Description
-import org.hamcrest.Matcher
+import com.github.aakumykov.kotlin_playground.MainActivity
+import com.github.aakumykov.kotlin_playground.R
+import com.github.aakumykov.kotlin_playground.utils.string
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test

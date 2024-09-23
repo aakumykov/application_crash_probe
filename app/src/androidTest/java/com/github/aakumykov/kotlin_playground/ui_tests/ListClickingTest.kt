@@ -1,9 +1,10 @@
-package com.github.aakumykov.kotlin_playground
+package com.github.aakumykov.kotlin_playground.ui_tests
 
 import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.BoundedMatcher
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut
+import com.github.aakumykov.kotlin_playground.R
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 

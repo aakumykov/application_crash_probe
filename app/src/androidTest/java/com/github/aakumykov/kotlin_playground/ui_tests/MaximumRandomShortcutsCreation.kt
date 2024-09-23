@@ -1,10 +1,4 @@
-package com.github.aakumykov.kotlin_playground
-
-import androidx.test.ext.junit.rules.ActivityScenarioRule
-import org.junit.After
-import org.junit.Rule
-import org.junit.Test
-import kotlin.random.Random
+package com.github.aakumykov.kotlin_playground.ui_tests
 
 class MaximumRandomShortcutsCreation : ListClickingTest() {
 
