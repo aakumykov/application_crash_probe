@@ -2,6 +2,7 @@ package com.github.aakumykov.kotlin_playground
 
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
+import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -12,7 +13,9 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Direction
 import androidx.test.uiautomator.UiDevice
 import junit.framework.TestCase.assertEquals
+import org.hamcrest.CoreMatchers.anything
 import org.junit.After
+import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -22,6 +25,7 @@ import org.junit.runner.RunWith
 class ExampleAppShortcutsTest {
 
     private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+    private val context = InstrumentationRegistry.getInstrumentation().targetContext
 
     private val defaultShortcutList = listOf(
         string(R.string.shortcut_label_settings),
@@ -31,39 +35,38 @@ class ExampleAppShortcutsTest {
     )
 
 
-    @Test
-    fun calendar_shouldDisplayNewEventShortcut() {
+    /*@Test
+    fun calendar_should_display_NewEvent_shortcut() {
         openAllApps(device)
         openAppShortcuts(device, R.string.calendar)
         verifyAppShortcuts(listOf(string(R.string.action_new_event)))
-    }
+    }*/
 
 
     @Test
-    fun onAppInstallDefaultShortcutsMustBeCreated() {
+    fun default_shortcuts_must_be_created_on_app_install() {
         openAllApps(device)
         openSelfShortcuts(device)
-        /*verifyAppShortcuts(listOf(
+        verifyAppShortcuts(listOf(
             string(R.string.shortcut_label_settings)
-        ))*/
+        ))
     }
 
 
     @Test
-    fun shouldDisplayDefaultShortcutsAfterCreatingThem() {
+    fun should_display_default_shortcuts_after_creating_them() {
         openAllApps(device)
         openSelfApp(device)
         clickButton(R.id.createDefaultShortcuts)
 
-
-        openAllApps(device)
-        openSelfShortcuts(device)
+        openAllApps()
+        openSelfShortcuts()
         verifyAppShortcuts(defaultShortcutList)
     }
 
 
     @Test
-    fun shouldNoDisplayAppShortcutsAfterDeleteAll() {
+    fun should_no_display_app_shortcuts_after_delete_all_shortcuts_button_pressed() {
         openAllApps(device)
         openSelfApp(device)
         clickButton(R.id.removeAllShortcuts)
@@ -71,6 +74,26 @@ class ExampleAppShortcutsTest {
         openAllApps(device)
         openSelfShortcuts(device)
         verifyNoAppShortcuts(defaultShortcutList)
+    }
+
+
+// Check Adapterview is displayed or not and perform click on second item. onData(allOf(withProductID(1)))
+//        onData(anything())
+//            .inAdapterView(allOf(isAssignableFrom(AdapterView.class), isDisplayed()))
+//            .perform(click());
+
+
+    @Test
+    fun should_click_on_1st_list_item() {
+        openSelfAppFromAllApps()
+
+        onData(anything())
+            .inAdapterView(withId(R.id.listView))
+            .atPosition(0)
+            .perform(click())
+
+        clickButton(R.id.updateShortcutsButton)
+
     }
 
 
@@ -102,7 +125,7 @@ class ExampleAppShortcutsTest {
 
     private fun openAllApps(device: UiDevice) {
 
-        device.pressHome()
+        pressHome(device)
 
         if (android.os.Build.VERSION.SDK_INT == 25) {
             openAppByName(device, "Apps list")
