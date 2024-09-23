@@ -14,8 +14,6 @@ import androidx.test.uiautomator.Direction
 import androidx.test.uiautomator.UiDevice
 import junit.framework.TestCase.assertEquals
 import org.hamcrest.CoreMatchers.anything
-import org.junit.After
-import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -59,8 +57,8 @@ class ExampleAppShortcutsTest {
         openSelfApp(device)
         clickButton(R.id.createDefaultShortcuts)
 
-        openAllApps()
-        openSelfShortcuts()
+        openAllApps(device)
+        openSelfShortcuts(device)
         verifyAppShortcuts(defaultShortcutList)
     }
 
@@ -85,7 +83,7 @@ class ExampleAppShortcutsTest {
 
     @Test
     fun should_click_on_1st_list_item() {
-        openSelfAppFromAllApps()
+        openSelfAppFromAllApps(device)
 
         onData(anything())
             .inAdapterView(withId(R.id.listView))
