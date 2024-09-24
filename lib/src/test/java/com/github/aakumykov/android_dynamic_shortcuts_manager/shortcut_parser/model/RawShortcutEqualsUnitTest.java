@@ -7,10 +7,14 @@ import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.m
 
 import org.junit.Test;
 
-public class RawShortcutUnitTest {
+public class RawShortcutEqualsUnitTest {
 
     //
-    // Тест неполный! Test are not complete!
+    // Тест неполный!
+    // Test are not complete!
+    //
+    // Проверяется корректная (в контексте программы) работа метода "equals".
+    // "Equals" method work (in context on the app) is tested.
     //
 
     private static final String SOME_SHORTCUT_ID = "some_shortcut_id";
@@ -24,9 +28,6 @@ public class RawShortcutUnitTest {
 
     private static final String SOME_SHORT_LABEL = "some_short_label";
     private static final String OTHER_SHORT_LABEL = "other_short_label";
-
-//    private static final String SOME_ = "some_";
-//    private static final String OTHER_ = "other_";
 
 
     private static final RawShortcut rs1 = new RawShortcut(

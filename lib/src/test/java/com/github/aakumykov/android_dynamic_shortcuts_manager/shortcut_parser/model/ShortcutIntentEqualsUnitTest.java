@@ -7,7 +7,12 @@ import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.m
 
 import org.junit.Test;
 
-public class ShortcutIntentUnitTest {
+public class ShortcutIntentEqualsUnitTest {
+
+    //
+    // Проверяется корректная (в контексте программы) работа метода "equals".
+    // "Equals" method work (in context on the app) is tested.
+    //
 
     private static final String SOME_ACTION = "some_action";
     private static final String OTHER_ACTION = "other_action";
