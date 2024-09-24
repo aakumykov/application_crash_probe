@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.preference.PreferenceManager
 import android.util.Log
-import com.github.aakumykov.android_dynamic_shortcuts_manager.DefaultShortcutsCreator
+import com.github.aakumykov.android_dynamic_shortcuts_manager.default_shortcuts_creator.DefaultShortcutsCreator
 import com.github.aakumykov.kotlin_playground.extensions.getErrorMessage
 
 class App : Application() {

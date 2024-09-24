@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.core.content.pm.ShortcutInfoCompat;
 import androidx.core.content.pm.ShortcutManagerCompat;
 
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut;
+import com.github.aakumykov.android_dynamic_shortcuts_manager.model.Shortcut;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,8 +4,8 @@ import android.content.res.Resources;
 
 import androidx.annotation.RawRes;
 
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut;
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut;
+import com.github.aakumykov.android_dynamic_shortcuts_manager.model.RawShortcut;
+import com.github.aakumykov.android_dynamic_shortcuts_manager.model.Shortcut;
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.RawShortcutResolver;
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ResourceResolver;
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsSAXHandler;

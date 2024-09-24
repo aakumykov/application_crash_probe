@@ -1,6 +1,6 @@
 package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils;
 
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut;
+import com.github.aakumykov.android_dynamic_shortcuts_manager.model.RawShortcut;
 
 import org.xml.sax.SAXException;
 

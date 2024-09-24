@@ -1,7 +1,7 @@
 package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils;
 
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut;
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut;
+import com.github.aakumykov.android_dynamic_shortcuts_manager.model.RawShortcut;
+import com.github.aakumykov.android_dynamic_shortcuts_manager.model.Shortcut;
 
 public class RawShortcutResolver {
 

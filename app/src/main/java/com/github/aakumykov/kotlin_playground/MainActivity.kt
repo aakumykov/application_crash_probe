@@ -9,19 +9,12 @@ import android.widget.AdapterView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.util.forEach
-import com.github.aakumykov.android_dynamic_shortcuts_manager.DefaultShortcutsCreator
 import com.github.aakumykov.android_dynamic_shortcuts_manager.dynamic_shortcut_manager.DynamicShortcutManager
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.ShortcutsParser
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.Shortcut
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.RawShortcutResolver
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ResourceResolver
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsSAXHandler
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsXMLRawParser
+import com.github.aakumykov.android_dynamic_shortcuts_manager.model.Shortcut
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.extensions.getErrorMessage
-import com.github.aakumykov.kotlin_playground.extensions.showToast
 import com.google.android.material.snackbar.Snackbar
-import javax.xml.parsers.SAXParserFactory
 
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {

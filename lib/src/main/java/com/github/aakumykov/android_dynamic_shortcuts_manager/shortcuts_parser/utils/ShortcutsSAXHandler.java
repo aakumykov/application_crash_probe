@@ -4,8 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut;
-import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntent;
+import com.github.aakumykov.android_dynamic_shortcuts_manager.model.RawShortcut;
+import com.github.aakumykov.android_dynamic_shortcuts_manager.model.ShortcutIntent;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
