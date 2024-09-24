@@ -74,7 +74,7 @@ public class Shortcut {
 
         return this.shortcutId.equals(s.shortcutId) &&
                 this.enabled == s.enabled &&
-                this.icon == s.icon &&
+//                this.icon == s.icon && // FIXME: how to check icon field?
                 this.shortcutShortLabel == s.shortcutShortLabel &&
                 bothNullOrEquals(this.shortcutLongLabel, s.shortcutLongLabel) &&
                 bothNullOrEquals(this.shortcutDisabledMessage, s.shortcutDisabledMessage) &&
