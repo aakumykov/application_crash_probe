@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.github.aakumykov.kotlin_playground.MainActivity
 import com.github.aakumykov.kotlin_playground.R
-import com.github.aakumykov.kotlin_playground.utils.string
+import com.github.aakumykov.kotlin_playground.test_utils.string
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test

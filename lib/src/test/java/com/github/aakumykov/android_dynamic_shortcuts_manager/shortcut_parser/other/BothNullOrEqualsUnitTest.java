@@ -1,4 +1,4 @@
-package com.github.aakumykov.android_dynamic_shortcuts_manager;
+package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcut_parser.other;
 
 import static com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.other.ComparisonUtils.bothNullOrEquals;
 import static org.junit.Assert.assertFalse;

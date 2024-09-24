@@ -1,11 +1,10 @@
 package com.github.aakumykov.kotlin_playground.parser_test
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.github.aakumykov.android_dynamic_shortcuts_manager.R
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.RawShortcut
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.model.ShortcutIntent
 import com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.utils.ShortcutsXMLRawParser
-import com.github.aakumykov.kotlin_playground.utils.resources
+import com.github.aakumykov.kotlin_playground.test_utils.resources
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith

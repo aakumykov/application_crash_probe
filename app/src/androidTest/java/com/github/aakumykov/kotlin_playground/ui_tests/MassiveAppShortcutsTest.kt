@@ -1,7 +1,7 @@
 package com.github.aakumykov.kotlin_playground.ui_tests
 
 import com.github.aakumykov.kotlin_playground.R
-import com.github.aakumykov.kotlin_playground.utils.string
+import com.github.aakumykov.kotlin_playground.test_utils.string
 import org.junit.After
 import org.junit.Test
 

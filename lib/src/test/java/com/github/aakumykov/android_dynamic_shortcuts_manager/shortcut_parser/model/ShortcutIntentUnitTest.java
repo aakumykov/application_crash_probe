@@ -1,4 +1,4 @@
-package com.github.aakumykov.android_dynamic_shortcuts_manager;
+package com.github.aakumykov.android_dynamic_shortcuts_manager.shortcut_parser.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

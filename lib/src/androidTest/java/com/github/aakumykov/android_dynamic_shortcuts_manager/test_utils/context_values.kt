@@ -1,4 +1,4 @@
-package com.github.aakumykov.kotlin_playground.utils
+package com.github.aakumykov.android_dynamic_shortcuts_manager.test_utils
 
 import android.content.Context
 import android.content.res.Resources

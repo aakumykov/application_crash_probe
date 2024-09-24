@@ -12,7 +12,7 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Direction
 import androidx.test.uiautomator.UiDevice
 import com.github.aakumykov.kotlin_playground.R
-import com.github.aakumykov.kotlin_playground.utils.string
+import com.github.aakumykov.kotlin_playground.test_utils.string
 import junit.framework.TestCase.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.runner.RunWith
