@@ -1,6 +1,7 @@
 package com.github.aakumykov.android_dynamic_shortcuts_manager.model;
 
 import static com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.other.ComparisonUtils.bothNullOrEquals;
+import static com.github.aakumykov.android_dynamic_shortcuts_manager.shortcuts_parser.other.ComparisonUtils.notBothNull;
 
 import android.content.Context;
 import android.content.Intent;
@@ -77,6 +78,28 @@ public class Shortcut {
                 this.shortcutShortLabel == s.shortcutShortLabel &&
                 bothNullOrEquals(this.shortcutLongLabel, s.shortcutLongLabel) &&
                 bothNullOrEquals(this.shortcutDisabledMessage, s.shortcutDisabledMessage) &&
-                bothNullOrEquals(this.shortcutIntent, s.shortcutIntent);
+                areIntentsEquals(this.shortcutIntent, s.shortcutIntent);
+    }
+
+
+    private static boolean areIntentsEquals(@Nullable Intent intent1, @Nullable Intent intent2) {
+
+        if (null == intent1 && null == intent2) return true;
+        else if (notBothNull(intent1, intent2)) return false;
+        else {
+
+            @Nullable final String action1 = intent1.getAction();
+            @Nullable final String action2 = intent2.getAction();
+
+            @Nullable final String packageName1 = intent1.getPackage();
+            @Nullable final String packageName2 = intent2.getPackage();
+
+            @Nullable final String className1 = intent1.getClass().getName();
+            @Nullable final String className2 = intent2.getClass().getName();
+
+            return bothNullOrEquals(action1, action2) &&
+                    bothNullOrEquals(packageName1, packageName2) &&
+                    bothNullOrEquals(className1, className2);
+        }
     }
 }
