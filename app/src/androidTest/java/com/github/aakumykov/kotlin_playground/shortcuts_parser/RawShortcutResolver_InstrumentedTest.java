@@ -4,6 +4,8 @@ import static com.github.aakumykov.kotlin_playground.common.CommonValues.TARGET_
 
 import static org.junit.Assert.assertEquals;
 
+import android.content.Intent;
+
 import androidx.annotation.Nullable;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -27,20 +29,23 @@ public class RawShortcutResolver_InstrumentedTest {
     private static final String INTENT_ACTION = "net.sourceforge.opencamera.SHORTCUT_SETTINGS";
     private static final String INTENT_TARGET_PACKAGE = "net.sourceforge.opencamera";
     private static final String INTENT_TARGET_CLASS = "net.sourceforge.opencamera.MainActivity";
+    private static final ShortcutIntent SOURCE_SHORTCUT_INTENT = new ShortcutIntent(INTENT_ACTION, INTENT_TARGET_PACKAGE, INTENT_TARGET_CLASS);
+    private static final ShortcutIntent EXPECTED_SHORTCUT_INTENT = new ShortcutIntent(INTENT_ACTION, INTENT_TARGET_PACKAGE, INTENT_TARGET_CLASS);
 
     private static final RawShortcut SOURCE_RAW_SHORTCUT = new RawShortcut(
             SHORTCUT_ID,
             IS_ENABLED,
             ICON_NAME,
             SHORT_LABEL_NAME,
-            new ShortcutIntent(INTENT_ACTION, INTENT_TARGET_PACKAGE, INTENT_TARGET_CLASS)
+            SOURCE_SHORTCUT_INTENT
     );
 
     private static final Shortcut EXPECTED_SHORTCUT = new Shortcut(
             SHORTCUT_ID,
             IS_ENABLED,
             R.drawable.shortcut_settings,
-            R.string.shortcut_label_settings
+            R.string.shortcut_label_settings,
+            EXPECTED_SHORTCUT_INTENT.toIntent()
     );
 
     @Nullable private RawShortcutResolver rawShortcutResolver;
