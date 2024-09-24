@@ -20,7 +20,8 @@ public class Shortcut_Equals_UnitTest {
     private static final boolean SOME_SHORTCUT_ENABLED = true;
     private static final int SOME_SHORTCUT_ICON = R.drawable.shortcut_settings;
     private static final int SOME_SHORTCUT_SHORT_LABEL = R.string.shortcut_label_settings;
-    private static final Intent SOME_SHORTCUT_INTENT = openCameraIntentWithAction("net.sourceforge.opencamera.SHORTCUT_SETTINGS");
+    private static final Intent INTENT1 = openCameraIntentWithAction("net.sourceforge.opencamera.SHORTCUT_SETTINGS");
+    private static final Intent INTENT2 = openCameraIntentWithAction("net.sourceforge.opencamera.SHORTCUT_SETTINGS");
 
     public static Intent openCameraIntentWithAction(String action) {
         Intent intent = new Intent(action);
@@ -33,23 +34,23 @@ public class Shortcut_Equals_UnitTest {
         SOME_SHORTCUT_ENABLED,
         SOME_SHORTCUT_ICON,
         SOME_SHORTCUT_SHORT_LABEL,
-        SOME_SHORTCUT_INTENT
+        INTENT1
     );
 
     private static final Shortcut SHORTCUT_2 = new Shortcut(
-            SOME_SHORTCUT_ID,
-            SOME_SHORTCUT_ENABLED,
-            SOME_SHORTCUT_ICON,
-            SOME_SHORTCUT_SHORT_LABEL,
-            SOME_SHORTCUT_INTENT
+        SOME_SHORTCUT_ID,
+        SOME_SHORTCUT_ENABLED,
+        SOME_SHORTCUT_ICON,
+        SOME_SHORTCUT_SHORT_LABEL,
+        INTENT2
     );
 
     private static final Shortcut OTHER_SHORTCUT = new Shortcut(
-            "gallery",
-                    true,
-            R.drawable.shortcut_gallery,
-            R.string.shortcut_label_gallery,
-            openCameraIntentWithAction("net.sourceforge.opencamera.SHORTCUT_GALLERY")
+        "gallery",
+        true,
+        R.drawable.shortcut_gallery,
+        R.string.shortcut_label_gallery,
+        openCameraIntentWithAction("net.sourceforge.opencamera.SHORTCUT_GALLERY")
     );
 
 
