@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setTitle(R.string.app_description)
+
         binding.appInfoButton.setOnClickListener { showAppProperties() }
         binding.clearLogButton.setOnClickListener { Logger.clear() }
 
