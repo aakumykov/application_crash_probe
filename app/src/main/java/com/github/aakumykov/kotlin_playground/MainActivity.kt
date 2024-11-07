@@ -1,6 +1,7 @@
 package com.github.aakumykov.kotlin_playground
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.extensions.showAppProperties
@@ -26,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         binding.button2.setOnClickListener { action2() }
         binding.button3.setOnClickListener { action3() }
         binding.button4.setOnClickListener { action4() }
+
+        Logger.d(TAG, Qwerty.work())
     }
 
 
