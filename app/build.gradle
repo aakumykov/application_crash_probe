@@ -24,7 +24,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
         }
     }
     compileOptions {
@@ -33,15 +32,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-    }
-    flavorDimensions 'qwerty_dim'
-    productFlavors {
-        mock {
-            dimension 'qwerty_dim'
-        }
-        prod {
-            dimension 'qwerty_dim'
-        }
     }
 }
 
