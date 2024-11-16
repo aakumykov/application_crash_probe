@@ -30,7 +30,8 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun action1() {
-        showToast("Привет :-)")
+        val a: String? = null
+        val qwerty = a!!
     }
 
     private fun action2() {
