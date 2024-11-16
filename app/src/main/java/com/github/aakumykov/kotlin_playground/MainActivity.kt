@@ -9,6 +9,8 @@ import com.github.aakumykov.kotlin_playground.extensions.showToast
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val a = null
+    private var b: Any? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Logger.messages.observe(this) { messages -> binding.logView.text = messages.joinToString("\n") }
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun action2() {
-        showToast("Привет 2")
+        b = a!!
     }
 
     private fun action3() {
