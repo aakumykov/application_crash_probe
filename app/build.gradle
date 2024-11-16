@@ -17,20 +17,61 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildFeatures {
-        viewBinding true
+
+    def keystorePropertiesFileName = "../local.properties"
+    def keystoreProperties = new Properties()
+    keystoreProperties.load(new FileInputStream(file(keystorePropertiesFileName)))
+
+    def keystoreFileKey = 'keystoreFile'
+    def keystoreFile = keystoreProperties[keystoreFileKey]
+    if (null == keystoreFile) throw new NullPointerException("There is no '"+keystoreFileKey+"' field in "+keystorePropertiesFileName)
+
+    def keystorePasswordKey = 'keystorePassword'
+    def keystorePassword = keystoreProperties[keystorePasswordKey]
+    if (null == keystorePassword) throw new NullPointerException("There is no '"+keystorePasswordKey+"' field in "+keystorePropertiesFileName)
+
+    /* Не называй переменную 'keyAlias' - это нарушает работу скрипта. */
+    def keyAliasKey = 'keyAlias'
+    def keystoreKeyAlias = keystoreProperties[keyAliasKey]
+    if (null == keystoreKeyAlias) throw new NullPointerException("There is no '"+keyAliasKey+"' field in "+keystorePropertiesFileName)
+
+    def keyPasswordKey = 'keyPassword'
+    def keystoreKeyPassword = keystoreProperties[keyPasswordKey]
+    if (null == keystoreKeyPassword) throw new NullPointerException("There is no '"+keyPassword+"' field in "+keystorePropertiesFileName)
+
+    signingConfigs {
+        release {
+            storeFile = file(keystoreFile)
+            storePassword = keystorePassword
+            keyAlias = keystoreKeyAlias
+            keyPassword = keystoreKeyPassword
+        }
+        debug {
+            storeFile = file(keystoreFile)
+            storePassword = keystorePassword
+            keyAlias = keystoreKeyAlias
+            keyPassword = keystoreKeyPassword
+        }
     }
+
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             applicationIdSuffix '.release'
         }
         debug {
+            getIsDefault().set(true)
+            signingConfig signingConfigs.debug
             applicationIdSuffix '.debug'
         }
     }
+
+    buildFeatures {
+        viewBinding true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
