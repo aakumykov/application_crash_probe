@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.github.aakumykov.kotlin_playground.databinding.ActivityMainBinding
 import com.github.aakumykov.kotlin_playground.extensions.showAppProperties
 import com.github.aakumykov.kotlin_playground.extensions.showToast
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,7 +14,6 @@ class MainActivity : AppCompatActivity() {
     private var b: Any? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Logger.messages.observe(this) { messages -> binding.logView.text = messages.joinToString("\n") }
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         binding.button1.setOnClickListener { action1() }
         binding.button2.setOnClickListener { action2() }
         binding.button3.setOnClickListener { action3() }
-        binding.button4.setOnClickListener { action4() }
     }
 
 
@@ -41,13 +40,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun action3() {
-        showToast("Привет 3")
+        throw when(Random.nextInt(1,101)) {
+            in 1..33 -> RuntimeException("Manual runtime exception")
+            in 34..66 -> NullPointerException("Manual runtime exception")
+            else -> Exception("Manual simple exception")
+        }
     }
-
-    private fun action4() {
-        showToast("Привет 4")
-    }
-
 
 
     private fun log(text:String) = Logger.d(TAG, text)

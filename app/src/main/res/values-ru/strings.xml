@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Проверка падений</string>
+    <string name="app_description">Проверка падений приложения</string>
+    <string name="crash_with_var_exception">Ошибка с переменной</string>
+    <string name="crash_with_class_field">Ошибка поля класса</string>
+    <string name="manual_exception">Ручное исключение</string>
+</resources>

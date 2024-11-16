@@ -1,4 +1,7 @@
 <resources>
-    <string name="app_name">Песочница Kotlin</string>
-    <string name="app_description">Назначение приложения</string>
+    <string name="app_name">Crash probes</string>
+    <string name="app_description">App crash probes</string>
+    <string name="crash_with_var_exception">Var error</string>
+    <string name="crash_with_class_field">Class field error</string>
+    <string name="manual_exception">Manual exception</string>
 </resources>
